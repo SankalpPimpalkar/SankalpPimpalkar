@@ -15,6 +15,6 @@ I focus more on a professional approach. 🎯
 ![](https://github-readme-streak-stats.herokuapp.com/?user=SankalpPimpalkar&theme=dark&hide_border=false)
 
 ---
-[![](https://visitcount.itsvg.in/api?id=Sankalp-Pimpalkar&icon=0&color=6)](https://visitcount.itsvg.in)
+[![](https://visitcount.itsvg.in/api?id=SankalpPimpalkar&icon=0&color=6)](https://visitcount.itsvg.in)
 
 <!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
