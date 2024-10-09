@@ -59,7 +59,7 @@ export const projects = [
         title: 'ChatBot',
         level: 'Intermediate',
         description: 'A chatbot that can be used to get information about any topic',
-        source: 'https://github.com/Sankalp-Pimpalkar/AI-Chat-Bot',
+        source: 'https://github.com/SankalpPimpalkar/gemini-ai-clone',
         demo: 'https://ai-chat-bot-zeta.vercel.app/welcome'
     },
     {
@@ -68,7 +68,7 @@ export const projects = [
         title: 'E-commerce',
         level: 'Easy',
         description: 'An ecommerce app created using nextjs',
-        source: 'https://github.com/Sankalp-Pimpalkar/next-ecommerce',
+        source: 'https://github.com/SankalpPimpalkar/next-ecommerce',
         demo: 'https://next-ecommerce-rose-omega.vercel.app/'
     },
     {
@@ -77,7 +77,7 @@ export const projects = [
         title: 'ChatApp',
         level: 'Hard',
         description: 'A Chat Application created using mern stack',
-        source: 'https://github.com/Sankalp-Pimpalkar/chat-application',
+        source: 'https://github.com/SankalpPimpalkar/Chat-App',
         demo: '#'
     },
 ]
