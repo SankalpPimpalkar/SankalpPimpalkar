@@ -80,6 +80,15 @@ export const projects = [
         source: 'https://github.com/SankalpPimpalkar/Chat-App',
         demo: '#'
     },
+    {
+        id: 4,
+        year: 2024,
+        title: 'Notes App',
+        level: 'Intermediate',
+        description: 'A Notes App for managing your notes created using Nextjs',
+        source: 'https://github.com/SankalpPimpalkar/Notes-App',
+        demo: 'https://notes-app-eight-ebon.vercel.app/'
+    },
 ]
 
 export const works = [
