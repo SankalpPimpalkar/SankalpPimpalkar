@@ -89,6 +89,15 @@ export const projects = [
         source: 'https://github.com/SankalpPimpalkar/Notes-App',
         demo: 'https://notes-app-eight-ebon.vercel.app/'
     },
+    {
+        id: 5,
+        year: 2024,
+        title: 'Next Todo',
+        level: 'Intermediate',
+        description: 'A Todo App created using Appwrite and nextjs',
+        source: 'https://github.com/SankalpPimpalkar/Next-Todo',
+        demo: 'https://next-todo-wine.vercel.app/'
+    },
 ]
 
 export const works = [
