@@ -95,7 +95,7 @@ export const projects = [
         title: 'Next Todo',
         level: 'Intermediate',
         description: 'A Todo App created using Appwrite and nextjs',
-        source: 'https://github.com/SankalpPimpalkar/Next-Todo',
+        source: 'https://github.com/SankalpPimpalkar/Todos-Tracker',
         demo: 'https://next-todo-wine.vercel.app/'
     },
 ]
