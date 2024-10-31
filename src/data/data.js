@@ -92,7 +92,7 @@ export const projects = [
     {
         id: 5,
         year: 2024,
-        title: 'Next Todo',
+        title: 'Todos Tracker',
         level: 'Intermediate',
         description: 'A Todo App created using Appwrite and nextjs',
         source: 'https://github.com/SankalpPimpalkar/Todos-Tracker',
