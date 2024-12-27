@@ -1,8 +1,26 @@
+import { useEffect, useState } from "react"
 import Project from "../components/ui/Project"
 import Work from "../components/ui/Work"
 import { projects, skills, works } from "../data/data"
 
 function Home() {
+
+    const [repos, setRepos] = useState(projects)
+
+    const fetchRepos = async () => {
+        try {
+            const response = await fetch('https://api.github.com/users/SankalpPimpalkar/repos', { method: 'GET' })
+            const data = await response.json()
+            setRepos(data)
+            console.log(data)
+        } catch (error) {
+            setRepos([])
+        }
+    }
+
+    useEffect(() => {
+        // fetchRepos()
+    }, [])
 
     return (
         <main>
@@ -45,16 +63,17 @@ function Home() {
 
                 <ul className="flex flex-col sm:flex-row flex-wrap gap-2 mt-4 items-start">
                     {
-                        projects.map(project => (
+                        repos?.map(repo => (
                             <Project
-                                key={project.id}
-                                id={project.id}
-                                title={project.title}
-                                year={project.year}
-                                description={project.description}
-                                source={project.source}
-                                demo={project.demo}
-                                level={project.level}
+                                key={repo.id}
+                                id={repo.id}
+                                title={repo.name}
+                                publishedOn={repo.created_at}
+                                description={repo.description}
+                                source={repo.html_url}
+                                demo={repo.homepage}
+                                level={repo.level}
+                                language={repo.language}
                             />
                         ))
                     }
