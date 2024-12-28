@@ -5,11 +5,11 @@ import { projects, skills, works } from "../data/data"
 
 function Home() {
 
-    const [repos, setRepos] = useState(projects)
+    const [repos, setRepos] = useState([])
 
     const fetchRepos = async () => {
         try {
-            const response = await fetch('https://api.github.com/users/SankalpPimpalkar/repos', { method: 'GET' })
+            const response = await fetch('https://api.github.com/users/SankalpPimpalkar/repos')
             const data = await response.json()
             setRepos(data)
             console.log(data)
@@ -19,7 +19,10 @@ function Home() {
     }
 
     useEffect(() => {
-        // fetchRepos()
+        if (repos.length == 0) {
+            fetchRepos()
+        }
+
     }, [])
 
     return (
@@ -61,9 +64,9 @@ function Home() {
                     My Work
                 </h3>
 
-                <ul className="flex flex-col sm:flex-row flex-wrap gap-2 mt-4 items-start">
-                    {
-                        repos?.map(repo => (
+                {repos && repos.length > 0 ? (
+                    <ul className="flex flex-col sm:flex-row flex-wrap gap-2 mt-4 items-start">
+                        {repos.map(repo => (
                             <Project
                                 key={repo.id}
                                 id={repo.id}
@@ -75,10 +78,16 @@ function Home() {
                                 level={repo.level}
                                 language={repo.language}
                             />
-                        ))
-                    }
-                </ul>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="mt-4 text-gray-600 dark:text-gray-400">
+                        Failed to fetch Repositories. 
+                        Please try again later.
+                    </p>
+                )}
             </section>
+
 
             <section className="mt-8">
                 <h3 className="text-xl font-bold dark:text-gray-200 text-gray-600">
