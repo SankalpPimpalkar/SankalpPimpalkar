@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Project from "../components/ui/Project"
 import Work from "../components/ui/Work"
-import { projects, skills, works } from "../data/data"
+import { skills, works } from "../data/data"
 
 function Home() {
 
@@ -9,7 +9,7 @@ function Home() {
 
     const fetchRepos = async () => {
         try {
-            const response = await fetch('https://api.github.com/users/SankalpPimpalkar/repos')
+            const response = await fetch('https://api.github.com/users/SankalpPimpalkar/repos?sort=created')
             const data = await response.json()
             setRepos(data)
             console.log(data)
