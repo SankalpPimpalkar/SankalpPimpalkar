@@ -1,29 +1,9 @@
 import { useEffect, useState } from "react"
 import Project from "../components/ui/Project"
 import Work from "../components/ui/Work"
-import { skills, works } from "../data/data"
+import { skills, works, projects } from "../data/data"
 
 function Home() {
-
-    const [repos, setRepos] = useState([])
-
-    const fetchRepos = async () => {
-        try {
-            const response = await fetch('https://api.github.com/users/SankalpPimpalkar/repos?sort=created')
-            const data = await response.json()
-            setRepos(data)
-            console.log(data)
-        } catch (error) {
-            setRepos([])
-        }
-    }
-
-    useEffect(() => {
-        if (repos.length == 0) {
-            fetchRepos()
-        }
-
-    }, [])
 
     return (
         <main>
@@ -64,28 +44,21 @@ function Home() {
                     My Work
                 </h3>
 
-                {repos && repos.length > 0 ? (
-                    <ul className="flex flex-col sm:flex-row flex-wrap gap-2 mt-4 items-start">
-                        {repos.map(repo => (
+                <ul className="flex flex-wrap gap-2 mt-4">
+                    {
+                        projects.map(project => (
                             <Project
-                                key={repo.id}
-                                id={repo.id}
-                                title={repo.name}
-                                publishedOn={repo.created_at}
-                                description={repo.description}
-                                source={repo.html_url}
-                                demo={repo.homepage}
-                                level={repo.level}
-                                language={repo.language}
+                            key={project.id}
+                            id={project.id}
+                            title={project.name}
+                            created_year={project.created_year}
+                            description={project.description}
+                            source={project.source_code}
+                            demo={project.demo}
                             />
-                        ))}
-                    </ul>
-                ) : (
-                    <p className="mt-4 text-gray-600 dark:text-gray-400">
-                        Failed to fetch Repositories. 
-                        Please try again later.
-                    </p>
-                )}
+                        ))
+                    }
+                </ul>
             </section>
 
 
