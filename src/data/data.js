@@ -71,11 +71,11 @@ export const projects = [
     },
     {
         id: 3,
-        name: 'Gemini AI clone',
-        created_year: '2024',
-        description: 'A chatbot created in React for conversation',
-        source_code: 'https://github.com/SankalpPimpalkar/gemini-ai-clone',
-        demo: 'https://ai-chat-bot-zeta.vercel.app/signup'
+        name: 'Whatsapp CRM backend',
+        created_year: '2025',
+        description: 'A CRM backend designed for managing deals, interactions and tasks',
+        source_code: 'https://github.com/SankalpPimpalkar/whatsapp-crm-backend',
+        demo: ''
     },
     {
         id: 4,
