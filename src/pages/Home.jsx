@@ -14,8 +14,8 @@ function Home() {
                     <h1 className="text-3xl font-bold dark:text-gray-200 text-gray-800">
                         Hey, I&apos;m Sankalp
                     </h1>
-                    <p className="w-full max-w-sm mt-2 font-medium dark:text-gray-200 text-gray-600 text-lg leading-relaxed">
-                        I&apos;m a full stack developer with a dream of becoming a senior software engineer one day 👨‍🎓
+                    <p className="w-full max-w-sm mt-2 text-sm dark:text-gray-200 text-gray-600 leading-relaxed">
+                        I&apos;m a full stack developer with a dream of becoming a senior software engineer 👨‍🎓
                     </p>
                 </span>
             </section>

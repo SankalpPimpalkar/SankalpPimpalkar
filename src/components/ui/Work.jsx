@@ -9,18 +9,18 @@ function Work({ companyName, role, companylocation, description, respAndAchievem
         <div className="border rounded-md dark:bg-gray-secondary bg-gray-200 dark:border-gray-tertiary border-gray-300 p-4 w-full max-w-[40rem]">
             <div className="flex flex-col gap-4 items-start md:flex-row md:items-center md:gap-0 justify-between">
                 <span>
-                    <h3 className="text-xl mb-2 font-bold dark:text-gray-200 text-gray-600">
+                    <h3 className="text-lg mb-2 font-bold dark:text-gray-200 text-gray-600">
                         {companyName}
                     </h3>
-                    <h4 className="text-lg mb-1 dark:text-green-500 text-green-600 font-medium">
+                    <h4 className="text-sm mb-1 dark:text-green-500 text-green-600 font-medium">
                         {role}
                     </h4>
-                    <h4 className="text-gray-600 dark:text-gray-300">
+                    <h4 className="text-sm text-gray-600 dark:text-gray-300">
                         {companylocation}
                     </h4>
                 </span>
 
-                <button className="dark:text-gray-300 text-gray-800 bg-gray-300 font-medium dark:hover:border-gray-300/0 hover:bg-gray-100 dark:hover:bg-gray-300/10 px-2 py-1 rounded-md border dark:border-gray-dark dark:bg-gray-dark transition-all duration-300 flex items-center gap-2 text-base mr-2"
+                <button className="dark:text-gray-300 text-gray-800 bg-gray-300 font-medium dark:hover:border-gray-300/0 hover:bg-gray-100 dark:hover:bg-gray-300/10 px-3 py-1.5 rounded-md border dark:border-gray-dark dark:bg-gray-dark transition-all duration-300 flex items-center gap-2 mr-2 text-sm"
                     onClick={() => setShowState(!showState)}
                 >
                     {

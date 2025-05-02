@@ -1,22 +1,22 @@
 import Link from "../components/ui/Link";
-import { College, CSS, Express, Git, HTML, JS, Nextjs, Nodejs, React, TailwindCSS } from "../data/links";
+import { College, CSS, Express, Git, HTML, JS, Nextjs, Nodejs, React, TailwindCSS, Django, ReactNative } from "../data/links";
 
 function About() {
     return (
         <main className="mt-20">
             <div className="hidden sm:block">
-                <img className="w-20 h-20 rounded-full" src="/logo.jpg" alt="logo"/>
+                <img className="w-20 h-20 rounded-full" src="/logo.jpeg" alt="logo"/>
             </div>
 
             <section className="mt-8 flex flex-col gap-4 items-start">
-                <p className="text-gray-600 dark:text-gray-300 text-lg font-medium leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
                     I&apos;m Sankalp Pimpalkar, an Engineering Student from
                     <Link href={College}>
                         {' '}Terna Engineering College, Navi Mumbai{' '}
                     </Link>.
                     I started my journey as a web developer in 2022 and since then, I have learned a lot of technologies.
                 </p>
-                <p className="text-gray-600 dark:text-gray-300 text-lg font-medium leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
                     My journey began with the basics of
                     <Link href={HTML}>{' '}HTML{' '}</Link>,
                     <Link href={CSS}>{' '}CSS{' '}</Link>, and
@@ -27,7 +27,14 @@ function About() {
                     <Link href={TailwindCSS}>{' '}Tailwind CSS{' '}</Link>.
                     I am passionate about building responsive and user-friendly web applications that provide a seamless experience across different devices and platforms.
                 </p>
-                <p className="text-gray-600 dark:text-gray-300 text-lg font-medium leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+                    To broaden my backend development skills, I've also started working with
+                    <Link href={Django}>{' '}Django{' '}</Link>,
+                    a powerful Python framework that has helped me understand server-side development better. Additionally, I'm currently exploring mobile app development through
+                    <Link href={ReactNative}>{' '}React Native{' '}</Link>,
+                    which allows me to leverage my React knowledge to build cross-platform mobile applications.
+                </p>
+                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
                     Throughout my projects, I have focused on writing clean, maintainable code and adhering to best practices in web development. I have experience working with version control systems like
                     <Link href={Git}>{' '}Git{' '}</Link>,
                     which has helped me collaborate effectively with other developers. Additionally, I have explored backend technologies like
@@ -35,11 +42,11 @@ function About() {
                     <Link href={Express}>{' '}Express{' '}</Link>
                     to gain a holistic understanding of web development.
                 </p>
-                <p className="text-gray-600 dark:text-gray-300 text-lg font-medium leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
                     Apart from technical skills, I am a strong advocate for continuous learning and staying updated with the latest industry trends. I actively participate in online communities, attend webinars, and contribute to open-source projects to enhance my knowledge and give back to the developer community.
                 </p>
-                <p className="text-gray-600 dark:text-gray-300 text-lg font-medium leading-relaxed">
-                    My goal is to leverage my skills and knowledge to create impactful web applications that solve real-world problems. I am excited about the opportunities in frontend development and look forward to collaborating with like-minded professionals to build innovative solutions.
+                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+                    My goal is to leverage my skills and knowledge to create impactful web applications that solve real-world problems. I am excited about the opportunities in both web and mobile development, and look forward to collaborating with like-minded professionals to build innovative solutions.
                 </p>
             </section>
         </main>

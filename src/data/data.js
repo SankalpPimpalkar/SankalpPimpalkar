@@ -1,8 +1,11 @@
-
 export const skills = [
     {
         iconClass: 'bx bxl-react text-sky-500',
         description: 'Understanding in core fundamentals of React'
+    },
+    {
+        iconClass: 'bx bxl-react text-blue-500',
+        description: 'Cross-Platform Development with React Native'
     },
     {
         iconClass: 'bx bxl-nodejs text-green-500',
@@ -33,6 +36,10 @@ export const skills = [
         description: 'Code Collaboration on GitHub'
     },
     {
+        iconClass: 'bx bxl-gitlab text-orange-500',
+        description: 'CI/CD & Collaboration with GitLab'
+    },
+    {
         iconClass: 'bx bxl-c-plus-plus text-blue-500',
         description: 'Programming in C++'
     },
@@ -47,8 +54,21 @@ export const skills = [
     {
         iconClass: 'bx bxs-data text-red-600',
         description: 'In-Memory Data Structure Store with Redis'
+    },
+    {
+        iconClass: 'bx bxl-django text-green-700',
+        description: 'Backend Development with Django'
+    },
+    {
+        iconClass: 'bx bxl-python text-yellow-500',
+        description: 'Programming in Python'
+    },
+    {
+        iconClass: 'bx bxl-firebase text-orange-500',
+        description: 'Realtime Database & Authentication with Firebase'
     }
 ];
+
 //  green --> yellow --> red --> purple
 //  Easy --> Intermediate --> Hard --> Advanced
 
