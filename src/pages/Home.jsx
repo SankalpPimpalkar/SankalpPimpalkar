@@ -67,7 +67,7 @@ function Home() {
                     Work Experience
                 </h3>
 
-                <ul className="mt-4 flex flex-col items-start w-full">
+                <ul className="mt-4 flex flex-col gap-2 items-start w-full">
                     {
                         works.map((work) => (
                             <Work

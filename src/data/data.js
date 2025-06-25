@@ -97,30 +97,6 @@ export const projects = [
         source_code: 'https://github.com/SankalpPimpalkar/whatsapp-crm-backend',
         demo: ''
     },
-    {
-        id: 4,
-        name: 'Banking Management System',
-        created_year: '2025',
-        description: 'A system to manage transactions powered by Django',
-        source_code: 'https://github.com/SankalpPimpalkar/Banking-Management-System',
-        demo: ''
-    },
-    {
-        id: 5,
-        name: 'Django Gallery',
-        created_year: '2024',
-        description: 'A gallery app to upload photos',
-        source_code: 'https://github.com/SankalpPimpalkar/Django-Gallery',
-        demo: ''
-    },
-    {
-        id: 6,
-        name: 'Videos Tracker using Python',
-        created_year: '2024',
-        description: 'This is a Videos Tracker CLI written in python which adds functionality to add, delete, update, and list videos',
-        source_code: 'https://github.com/SankalpPimpalkar/Videos-Tracker-CLI-in-Python',
-        demo: ''
-    },
 ]
 
 export const works = [
@@ -140,5 +116,26 @@ export const works = [
             "Database: MongoDB, Mongoose.",
             "Soft Skills: Project Management, Problem Solving, Collaboration."
         ]
-    }
+    },
+    {
+    id: 2,
+    companyName: "Opus Brains",
+    role: "Full Stack Developer",
+    location: "Remote",
+    companyDescription: "Opus is a USA-based startup offering an AI-powered platform to monitor users' mental health. It uses a trained model to analyze assessments, tracking mental states over time through comparative evaluation.",
+    respAndAchievements: [
+        "Developed and optimized full-stack features ensuring adherence to industry standards for efficiency, scalability, and security.",
+        "Improved system reliability and enhanced user experience by refactoring legacy code and streamlining data workflows.",
+        "Contributed to AI integration pipelines and backend services that enabled 78% accuracy in mental health pattern detection.",
+        "Achieved an 85% boost in system performance through architectural optimizations and efficient resource handling."
+    ],
+    skillUtilized: [
+        "Programming Languages: JavaScript (ES6+), TypeScript.",
+        "Frameworks/Libraries: React, Node.js, Express.js.",
+        "Database: MongoDB, Mongoose.",
+        "AI & Data: Integration of AI models into backend services.",
+        "Soft Skills: Code Quality Enforcement, Remote Collaboration, Problem Solving."
+    ]
+}
+
 ]
