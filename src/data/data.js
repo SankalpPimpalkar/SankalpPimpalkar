@@ -91,6 +91,14 @@ export const projects = [
     },
     {
         id: 3,
+        name: 'S3 Credential Bucket',
+        created_year: '2025',
+        description: 'It is an UI Interface for accessing medias and files from s3 bucket using s3 credentials.',
+        source_code: 'https://github.com/SankalpPimpalkar/S3-Bucket-Storage-Manager',
+        demo: 'https://s3-bucket-storage-manager.vercel.app/'
+    },
+    {
+        id: 4,
         name: 'Whatsapp CRM backend',
         created_year: '2025',
         description: 'A CRM backend designed for managing deals, interactions and tasks',
