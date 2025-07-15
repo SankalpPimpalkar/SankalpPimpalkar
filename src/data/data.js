@@ -77,35 +77,44 @@ export const projects = [
         id: 1,
         name: 'Finance Management System',
         created_year: '2024',
-        description: 'A mern stack freelance collaborative project to manage all finances ',
+        description: 'A MERN stack project to manage and track personal or team finances. Built collaboratively with role-based access. Ideal for freelancers and small businesses.',
         source_code: 'https://github.com/SankalpPimpalkar/Role_Base_Auth-main',
         demo: 'https://financemangament.vercel.app/'
     },
     {
         id: 2,
-        name: 'Todos Tracker',
-        created_year: '2024',
-        description: 'Todos Tracker powered by React and Appwrite',
-        source_code: 'https://github.com/SankalpPimpalkar/Todos-Tracker',
-        demo: 'https://next-todo-wine.vercel.app/auth/login'
-    },
-    {
-        id: 3,
         name: 'S3 Credential Bucket',
         created_year: '2025',
-        description: 'It is an UI Interface for accessing medias and files from s3 bucket using s3 credentials.',
+        description: 'A simple UI interface to browse and manage media from S3 buckets. Uses AWS credentials securely for access. Streamlines file handling for developers.',
         source_code: 'https://github.com/SankalpPimpalkar/S3-Bucket-Storage-Manager',
         demo: 'https://s3-bucket-storage-manager.vercel.app/'
     },
     {
+        id: 3,
+        name: 'Cardly',
+        created_year: '2024',
+        description: 'A profile-sharing platform to showcase digital identities. Clean, responsive, and easy to share. Great for resumes, portfolios, or networking.',
+        source_code: 'https://github.com/SankalpPimpalkar/Cardly',
+        demo: 'https://cardly-one.vercel.app/u/shanky'
+    },
+    {
         id: 4,
+        name: 'Todos Tracker',
+        created_year: '2024',
+        description: 'A task tracking app built with React and Appwrite backend. Allows users to manage and update daily todos. Clean interface with authentication.',
+        source_code: 'https://github.com/SankalpPimpalkar/Todos-Tracker',
+        demo: 'https://next-todo-wine.vercel.app/auth/login'
+    },
+    {
+        id: 5,
         name: 'Whatsapp CRM backend',
         created_year: '2025',
-        description: 'A CRM backend designed for managing deals, interactions and tasks',
+        description: 'Backend system for a CRM tailored to WhatsApp-based interactions. Manages deals, tasks, and customer data. Built for scalability and automation.',
         source_code: 'https://github.com/SankalpPimpalkar/whatsapp-crm-backend',
         demo: ''
     },
 ]
+
 
 export const works = [
     {
@@ -126,24 +135,24 @@ export const works = [
         ]
     },
     {
-    id: 2,
-    companyName: "Opus Brains",
-    role: "Full Stack Developer",
-    location: "Remote",
-    companyDescription: "Opus is a USA-based startup offering an AI-powered platform to monitor users' mental health. It uses a trained model to analyze assessments, tracking mental states over time through comparative evaluation.",
-    respAndAchievements: [
-        "Developed and optimized full-stack features ensuring adherence to industry standards for efficiency, scalability, and security.",
-        "Improved system reliability and enhanced user experience by refactoring legacy code and streamlining data workflows.",
-        "Contributed to AI integration pipelines and backend services that enabled 78% accuracy in mental health pattern detection.",
-        "Achieved an 85% boost in system performance through architectural optimizations and efficient resource handling."
-    ],
-    skillUtilized: [
-        "Programming Languages: JavaScript (ES6+), TypeScript.",
-        "Frameworks/Libraries: React, Node.js, Express.js.",
-        "Database: MongoDB, Mongoose.",
-        "AI & Data: Integration of AI models into backend services.",
-        "Soft Skills: Code Quality Enforcement, Remote Collaboration, Problem Solving."
-    ]
-}
+        id: 2,
+        companyName: "Opus Brains",
+        role: "Full Stack Developer",
+        location: "Remote",
+        companyDescription: "Opus is a USA-based startup offering an AI-powered platform to monitor users' mental health. It uses a trained model to analyze assessments, tracking mental states over time through comparative evaluation.",
+        respAndAchievements: [
+            "Developed and optimized full-stack features ensuring adherence to industry standards for efficiency, scalability, and security.",
+            "Improved system reliability and enhanced user experience by refactoring legacy code and streamlining data workflows.",
+            "Contributed to AI integration pipelines and backend services that enabled 78% accuracy in mental health pattern detection.",
+            "Achieved an 85% boost in system performance through architectural optimizations and efficient resource handling."
+        ],
+        skillUtilized: [
+            "Programming Languages: JavaScript (ES6+), TypeScript.",
+            "Frameworks/Libraries: React, Node.js, Express.js.",
+            "Database: MongoDB, Mongoose.",
+            "AI & Data: Integration of AI models into backend services.",
+            "Soft Skills: Code Quality Enforcement, Remote Collaboration, Problem Solving."
+        ]
+    }
 
 ]
