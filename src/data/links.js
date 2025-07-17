@@ -1,4 +1,4 @@
-export const Instagram = "https://www.instagram.com/i.am.sankalp.23/"
+export const Instagram = "https://www.instagram.com/shhaanky/"
 export const Github = "https://github.com/SankalpPimpalkar"
 export const LinkedIn = "https://www.linkedin.com/in/sankalp-pimpalkar-179bbb269/"
 export const X = "https://x.com/Sankalp2310"
