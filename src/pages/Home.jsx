@@ -14,7 +14,7 @@ function Home() {
                         Hey, I&apos;m Sankalp
                     </h1>
                     <p className="w-full max-w-sm mt-2 text-sm dark:text-gray-200 text-gray-600 leading-relaxed">
-                        I&apos;m a full stack developer with a dream of becoming a senior software engineer 👨‍🎓
+                        Coding like a senior, debugging like a junior — powered by caffeine, Stack Overflow, and blind optimism ☕🧠🔥🐛
                     </p>
 
                     <a href='/Sankalp-Pimpalkar-Resume.pdf' target="_blank" className="border border-gray-300 dark:border-none text-gray-600 dark:bg-gray-secondary dark:text-gray-300 active:bg-gray-100 dark:active:bg-gray-secondary/40 px-4 py-2 text-xs mt-2 inline-block rounded-md">
