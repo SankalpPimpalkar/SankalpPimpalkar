@@ -1,3 +1,5 @@
+export const tagLine = `Coding like a senior, debugging like a junior — powered by caffeine, Stack Overflow, and blind optimism ☕🧠🔥🐛`
+
 export const skills = [
     {
         iconClass: 'bx bxl-react text-sky-500',
