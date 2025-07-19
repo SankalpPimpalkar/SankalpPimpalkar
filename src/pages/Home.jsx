@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import Project from "../components/ui/Project"
 import Work from "../components/ui/Work"
 import { skills, works, projects } from "../data/data"
@@ -17,6 +16,10 @@ function Home() {
                     <p className="w-full max-w-sm mt-2 text-sm dark:text-gray-200 text-gray-600 leading-relaxed">
                         I&apos;m a full stack developer with a dream of becoming a senior software engineer 👨‍🎓
                     </p>
+
+                    <a href='/Sankalp-Pimpalkar-Resume.pdf' target="_blank" className="border border-gray-300 dark:border-none text-gray-600 dark:bg-gray-secondary dark:text-gray-300 active:bg-gray-100 dark:active:bg-gray-secondary/40 px-4 py-2 text-xs mt-2 inline-block rounded-md">
+                        View Resume
+                    </a>
                 </span>
             </section>
 
@@ -28,9 +31,9 @@ function Home() {
                 <ul className="flex flex-col sm:flex-row flex-wrap gap-2 mt-4 items-start">
                     {
                         skills.map(skill => (
-                            <li key={skill.description} className="flex items-center gap-2 md:border border-gray-300 dark:md:border-gray-secondary md:p-3 rounded-lg w-full md:max-w-xs h-full md:h-20">
+                            <li key={skill.description} className="flex items-center gap-2 md:border border-gray-150 bg-gray-50 dark:bg-gray-secondary/30 dark:md:border-gray-secondary md:p-3 rounded-lg w-full md:max-w-xs h-full md:h-20">
                                 <i className={`${skill.iconClass} text-3xl`} alt="skillIcon" />
-                                <p className="text-base font-medium dark:text-gray-200 text-gray-700">
+                                <p className="text-sm font-medium dark:text-gray-200 text-gray-700">
                                     {skill.description}
                                 </p>
                             </li>

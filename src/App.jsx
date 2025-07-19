@@ -15,7 +15,6 @@ function App() {
         <Route path="/feedback" element={<Feedback />} />
         {/* <Route path="/articles" element={<Articles />} /> */}
 
-
         <Route path="*" element={<Construction />} />
       </Route>
     </Routes>

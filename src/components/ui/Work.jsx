@@ -6,7 +6,7 @@ function Work({ companyName, role, companylocation, description, respAndAchievem
     const [showState, setShowState] = useState(false)
 
     return (
-        <div className="border rounded-md dark:bg-gray-secondary bg-gray-200 dark:border-gray-tertiary border-gray-300 p-4 w-full max-w-[40rem]">
+        <div className="border rounded-md dark:bg-gray-secondary bg-gray-50 dark:border-gray-tertiary border-gray-150 p-4 w-full max-w-[40rem]">
             <div className="flex flex-col gap-4 items-start md:flex-row md:items-center md:gap-0 justify-between">
                 <span>
                     <h3 className="text-lg mb-2 font-bold dark:text-gray-200 text-gray-600">
@@ -20,7 +20,7 @@ function Work({ companyName, role, companylocation, description, respAndAchievem
                     </h4>
                 </span>
 
-                <button className="dark:text-gray-300 text-gray-800 bg-gray-300 font-medium dark:hover:border-gray-300/0 hover:bg-gray-100 dark:hover:bg-gray-300/10 px-3 py-1.5 rounded-md border dark:border-gray-dark dark:bg-gray-dark transition-all duration-300 flex items-center gap-2 mr-2 text-sm"
+                <button className="dark:text-gray-300 text-gray-500 bg-gray-100 font-medium dark:hover:border-gray-300/0 hover:bg-gray-100 dark:hover:bg-gray-300/10 px-3 py-1.5 rounded-md border dark:border-gray-dark dark:bg-gray-dark transition-all duration-300 flex items-center gap-2 mr-2 text-xs"
                     onClick={() => setShowState(!showState)}
                 >
                     {
@@ -42,7 +42,7 @@ function Work({ companyName, role, companylocation, description, respAndAchievem
                     Responsibilities & Achievements
                 </h3>
 
-                <ul className="list-disc dark:text-gray-400 text-gray-500 px-5 mb-4 flex flex-col gap-2">
+                <ul className="dark:text-gray-400 text-gray-500 mb-4 flex flex-col gap-2">
                     {
                         respAndAchievements.map((item, index) => (
                             <li key={index}>
@@ -56,7 +56,7 @@ function Work({ companyName, role, companylocation, description, respAndAchievem
                     Skill Utilized
                 </h3>
 
-                <ul className="list-disc dark:text-gray-400 text-gray-500 px-5 mb-2 flex flex-col gap-2">
+                <ul className="dark:text-gray-400 text-gray-500 mb-2 flex flex-col gap-2">
                     {
                         skillUtilized.map((item, index) => (
                             <li key={index}>

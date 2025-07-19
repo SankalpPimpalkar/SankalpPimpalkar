@@ -10,14 +10,14 @@ const navs = [
         name: "Home",
         path: "/",
         icon: "/house.png",
-        className: "w-5 h-5"
+        className: "w-4 h-4"
     },
     {
         id: 2,
         name: "About",
         path: "/about",
         icon: "/about.png",
-        className: "w-5 h-5"
+        className: "w-4 h-4"
     },
     // {
     //     id: 3,
@@ -31,14 +31,14 @@ const navs = [
         name: "Feedback",
         path: "/feedback",
         icon: "/feedback.png",
-        className: "w-6 h-6"
+        className: "w-4 h-4"
     },
     {
         id: 5,
         name: "Github",
         path: Github,
         icon: "/github.png",
-        className: "w-5 h-5 dark:invert"
+        className: "w-4 h-4 dark:invert"
     },
 ]
 
@@ -85,10 +85,10 @@ function Navbar() {
                         {
                             !isdarkMode ?
                                 (
-                                    <img className="w-5 h-5" src="/sun.png" alt="light-mode" />
+                                    <img className="w-4 h-4" src="/sun.png" alt="light-mode" />
                                 ) :
                                 (
-                                    <img className="w-5 h-5" src="/moon.png" alt="dark-mode" />
+                                    <img className="w-4 h-4" src="/moon.png" alt="dark-mode" />
                                 )
                         }
                     </Button>
@@ -100,7 +100,7 @@ function Navbar() {
                             <NavLink
                                 to={nav.path}
                                 className={({ isActive }) =>
-                                    `dark:hover:bg-gray-secondary hover:bg-gray-200 w-fit p-2 rounded-md border dark:border-gray-secondary border-gray-300 text-gray-700 dark:text-gray-300 transition-colors duration-300 flex items-center gap-2 snap-end ${isActive && 'dark:bg-gray-secondary bg-gray-200 dark:text-gray-100 text-gray-600'}`
+                                    `dark:hover:bg-gray-secondary hover:bg-gray-200 w-fit p-2 rounded-md border dark:border-gray-secondary border-gray-300 text-gray-700 dark:text-gray-300 transition-colors duration-300 flex items-center gap-2 snap-end text-xs ${isActive && 'dark:bg-gray-secondary bg-gray-200 dark:text-gray-100 text-gray-600'}`
                                 }
                             >
                                 <img className={nav.className} src={nav.icon} alt="navIcon" />
@@ -114,10 +114,10 @@ function Navbar() {
                     {
                         !isdarkMode ?
                             (
-                                <img className="w-5 h-5" src="/sun.png" alt="light-mode" />
+                                <img className="w-4 h-4" src="/sun.png" alt="light-mode" />
                             ) :
                             (
-                                <img className="w-5 h-5" src="/moon.png" alt="dark-mode" />
+                                <img className="w-4 h-4" src="/moon.png" alt="dark-mode" />
                             )
                     }
                 </Button>

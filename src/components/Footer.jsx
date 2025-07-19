@@ -2,7 +2,7 @@ import { Github, Instagram, LinkedIn, X } from "../data/links"
 
 function Footer() {
     return (
-        <div className="p-5 flex flex-col items-center mt-5">
+        <div className="p-5 flex flex-col items-center mt-5 text-sm">
             <p className="dark:text-gray-300 text-gray-800 text-center">
                 Made with ❤️ by  Sankalp Pimpalkar
             </p>
