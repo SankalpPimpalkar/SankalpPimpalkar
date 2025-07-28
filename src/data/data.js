@@ -136,25 +136,25 @@ export const works = [
             "Soft Skills: Project Management, Problem Solving, Collaboration."
         ]
     },
-    {
-        id: 2,
-        companyName: "Opus Brains",
-        role: "Full Stack Developer",
-        location: "Remote",
-        companyDescription: "Opus is a USA-based startup offering an AI-powered platform to monitor users' mental health. It uses a trained model to analyze assessments, tracking mental states over time through comparative evaluation.",
-        respAndAchievements: [
-            "Developed and optimized full-stack features ensuring adherence to industry standards for efficiency, scalability, and security.",
-            "Improved system reliability and enhanced user experience by refactoring legacy code and streamlining data workflows.",
-            "Contributed to AI integration pipelines and backend services that enabled 78% accuracy in mental health pattern detection.",
-            "Achieved an 85% boost in system performance through architectural optimizations and efficient resource handling."
-        ],
-        skillUtilized: [
-            "Programming Languages: JavaScript (ES6+), TypeScript.",
-            "Frameworks/Libraries: React, Node.js, Express.js.",
-            "Database: MongoDB, Mongoose.",
-            "AI & Data: Integration of AI models into backend services.",
-            "Soft Skills: Code Quality Enforcement, Remote Collaboration, Problem Solving."
-        ]
-    }
+    // {
+    //     id: 2,
+    //     companyName: "Opus Brains",
+    //     role: "Full Stack Developer",
+    //     location: "Remote",
+    //     companyDescription: "Opus is a USA-based startup offering an AI-powered platform to monitor users' mental health. It uses a trained model to analyze assessments, tracking mental states over time through comparative evaluation.",
+    //     respAndAchievements: [
+    //         "Developed and optimized full-stack features ensuring adherence to industry standards for efficiency, scalability, and security.",
+    //         "Improved system reliability and enhanced user experience by refactoring legacy code and streamlining data workflows.",
+    //         "Contributed to AI integration pipelines and backend services that enabled 78% accuracy in mental health pattern detection.",
+    //         "Achieved an 85% boost in system performance through architectural optimizations and efficient resource handling."
+    //     ],
+    //     skillUtilized: [
+    //         "Programming Languages: JavaScript (ES6+), TypeScript.",
+    //         "Frameworks/Libraries: React, Node.js, Express.js.",
+    //         "Database: MongoDB, Mongoose.",
+    //         "AI & Data: Integration of AI models into backend services.",
+    //         "Soft Skills: Code Quality Enforcement, Remote Collaboration, Problem Solving."
+    //     ]
+    // }
 
 ]
