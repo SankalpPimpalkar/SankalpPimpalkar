@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState, useTransition } from "react"
+import { useEffect, useState } from "react"
 import Button from "../components/ui/Button"
 import Input from "../components/ui/Input"
 import { feedbackFunction, fetchFeedbacks } from "../functions/feedbackForm"
+import { Helmet } from "react-helmet"
 
 function Feedback() {
 
@@ -70,6 +71,17 @@ function Feedback() {
 
     return (
         <main className="mt-20">
+            <Helmet>
+                <title>Feedback | Sankalp Pimpalkar</title>
+                <meta name="description" content="Send feedback or get in touch with Sankalp Pimpalkar. Let's collaborate or discuss projects." />
+                <meta name="keywords" content="Feedback, Contact, Sankalp Pimpalkar, Hire Developer" />
+                <meta property="og:title" content="Feedback | Sankalp Pimpalkar" />
+                <meta property="og:description" content="Share your thoughts or reach out to Sankalp for web development work." />
+                <meta property="og:image" content="https://shanky.in/logo.jpeg" />
+                <meta property="og:url" content="https://shanky.in/feedback" />
+                <link rel="canonical" href="https://shanky.in/feedback" />
+            </Helmet>
+
             <div>
                 <h1 className="text-3xl font-bold dark:text-gray-200 text-gray-800">
                     Feedbacks
@@ -118,7 +130,7 @@ function Feedback() {
 
                 {
                     !response ? (
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4 max-w-md">
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4 w-full">
                             <Input
                                 id="name"
                                 value={feedbackForm.name}

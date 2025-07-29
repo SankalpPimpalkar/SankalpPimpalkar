@@ -1,11 +1,23 @@
+import { Helmet } from "react-helmet";
 import Link from "../components/ui/Link";
 import { College, CSS, Express, Git, HTML, JS, Nextjs, Nodejs, React, TailwindCSS, Django, ReactNative } from "../data/links";
 
 function About() {
     return (
         <main className="mt-20">
+            <Helmet>
+                <title>About | Sankalp Pimpalkar</title>
+                <meta name="description" content="Learn more about Sankalp Pimpalkar, a full stack web developer from India with a passion for backend and frontend technologies." />
+                <meta name="keywords" content="About Sankalp, Full Stack Developer, React Developer, Django Developer" />
+                <meta property="og:title" content="About | Sankalp Pimpalkar" />
+                <meta property="og:description" content="Background and journey of Sankalp, a full stack engineer with real-world project experience." />
+                <meta property="og:image" content="https://shanky.in/logo.jpeg" />
+                <meta property="og:url" content="https://shanky.in/about" />
+                <link rel="canonical" href="https://shanky.in/about" />
+            </Helmet>
+
             <div className="hidden sm:block">
-                <img className="w-20 h-20 rounded-full" src="/logo.jpeg" alt="logo"/>
+                <img className="w-20 h-20 rounded-full" src="/logo.jpeg" alt="logo" />
             </div>
 
             <section className="mt-8 flex flex-col gap-4 items-start">

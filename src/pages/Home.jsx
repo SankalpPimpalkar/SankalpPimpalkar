@@ -1,11 +1,24 @@
 import Project from "../components/ui/Project"
 import Work from "../components/ui/Work"
-import { skills, works, projects,tagLine } from "../data/data"
+import { skills, works, projects, tagLine } from "../data/data"
+import { Helmet } from "react-helmet"
 
 function Home() {
 
     return (
         <main>
+            <Helmet>
+                <title>Sankalp Pimpalkar | Full Stack Developer</title>
+                <meta name="description" content="Welcome to the portfolio of Sankalp Pimpalkar, a full stack developer specializing in React, Django, and AWS." />
+                <meta name="keywords" content="Sankalp Pimpalkar, Full Stack Developer, React.js, Django, Portfolio" />
+                <meta property="og:title" content="Sankalp Pimpalkar | Portfolio" />
+                <meta property="og:description" content="Explore Sankalp's projects, experience, and skills as a backend and frontend developer." />
+                <meta property="og:image" content="https://shanky.in/logo.jpeg" />
+                <meta property="og:url" content="https://shanky.in/" />
+                <link rel="canonical" href="https://shanky.in/" />
+            </Helmet>
+
+
             <section className="mt-28 sm:mt-16 flex flex-col gap-4 items-start sm:flex-row-reverse sm:items-center justify-between">
                 <img className="w-32 h-32 my-2" src="./enderman.gif" alt="enderman" />
 
@@ -51,13 +64,13 @@ function Home() {
                     {
                         projects.map(project => (
                             <Project
-                            key={project.id}
-                            id={project.id}
-                            title={project.name}
-                            created_year={project.created_year}
-                            description={project.description}
-                            source={project.source_code}
-                            demo={project.demo}
+                                key={project.id}
+                                id={project.id}
+                                title={project.name}
+                                created_year={project.created_year}
+                                description={project.description}
+                                source={project.source_code}
+                                demo={project.demo}
                             />
                         ))
                     }
