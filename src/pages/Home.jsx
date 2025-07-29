@@ -44,7 +44,7 @@ function Home() {
                 <ul className="flex flex-col sm:flex-row flex-wrap gap-2 mt-4 items-start">
                     {
                         skills.map(skill => (
-                            <li key={skill.description} className="flex items-center gap-2 border border-gray-150 bg-gray-50 dark:bg-gray-secondary/30 dark:md:border-gray-secondary p-3 rounded-lg w-full md:max-w-xs h-full md:h-20">
+                            <li key={skill.description} className="flex items-center gap-2 border border-gray-150 bg-gray-50 dark:bg-gray-secondary/30 dark:border-gray-secondary p-3 rounded-lg w-full md:max-w-xs h-full md:h-20">
                                 <i className={`${skill.iconClass} text-3xl`} alt="skillIcon" />
                                 <p className="text-sm font-medium dark:text-gray-200 text-gray-700">
                                     {skill.description}
