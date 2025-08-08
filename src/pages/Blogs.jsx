@@ -1,5 +1,5 @@
 
-function Articles() {
+function Blogs() {
     return (
         <div className="w-full h-screen text-gray-200 flex items-center justify-center">
             This page is under construction
@@ -7,4 +7,4 @@ function Articles() {
     )
 }
 
-export default Articles
+export default Blogs

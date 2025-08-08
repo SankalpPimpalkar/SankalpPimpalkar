@@ -19,13 +19,13 @@ const navs = [
         icon: "/about.png",
         className: "w-4 h-4"
     },
-    // {
-    //     id: 3,
-    //     name: "Articles",
-    //     path: "/articles",
-    //     icon: "/article.png",
-    //     className: "w-6 h-6"
-    // },
+    {
+        id: 3,
+        name: "Blogs",
+        path: "/blogs",
+        icon: "/article.png",
+        className: "w-4 h-4"
+    },
     {
         id: 4,
         name: "Feedback",
