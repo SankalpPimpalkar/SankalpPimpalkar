@@ -93,22 +93,6 @@ export const projects = [
     },
     {
         id: 3,
-        name: 'Cardly',
-        created_year: '2024',
-        description: 'A profile-sharing platform to showcase digital identities. Clean, responsive, and easy to share. Great for resumes, portfolios, or networking.',
-        source_code: 'https://github.com/SankalpPimpalkar/Cardly',
-        demo: 'https://cardly-one.vercel.app/u/shanky'
-    },
-    {
-        id: 4,
-        name: 'Todos Tracker',
-        created_year: '2024',
-        description: 'A task tracking app built with React and Appwrite backend. Allows users to manage and update daily todos. Clean interface with authentication.',
-        source_code: 'https://github.com/SankalpPimpalkar/Todos-Tracker',
-        demo: 'https://next-todo-wine.vercel.app/auth/login'
-    },
-    {
-        id: 5,
         name: 'Whatsapp CRM backend',
         created_year: '2025',
         description: 'Backend system for a CRM tailored to WhatsApp-based interactions. Manages deals, tasks, and customer data. Built for scalability and automation.',
@@ -121,6 +105,22 @@ export const projects = [
 export const works = [
     {
         id: 1,
+        companyName: "UnifyXperts",
+        role: "Full stack developer",
+        location: "Goregoan, Maharashtra",
+        companyDescription: "UnifyXperts is a technology consulting and solutions company based in Goregaon, Maharashtra that specializes in helping businesses streamline operations through digital transformation and ERP solutions.",
+        respAndAchievements: [
+            "Implemented REST APIs in Frappe to handle configurations and automate token refresh, ensuring reliable backend operations. Validated incoming records via APIs and inserted only non-duplicates into MariaDB, improving data integrity and performance. Collaborated with and guided teammates on data flow and database workflows, enhancing development efficiency."
+        ],
+        skillUtilized: [
+            "Programming Languages: JavaScript (ES6+), Python",
+            "Frameworks/Libraries: Frappe Framework",
+            "Database: MariaDB",
+            "Soft Skills: Project Management, Problem Solving, Collaboration."
+        ]
+    },
+    {
+        id: 2,
         companyName: "Superceuticals Private Limited",
         role: "Full stack developer",
         location: "Gurugram, Haryana 122005",
@@ -136,25 +136,4 @@ export const works = [
             "Soft Skills: Project Management, Problem Solving, Collaboration."
         ]
     },
-    // {
-    //     id: 2,
-    //     companyName: "Opus Brains",
-    //     role: "Full Stack Developer",
-    //     location: "Remote",
-    //     companyDescription: "Opus is a USA-based startup offering an AI-powered platform to monitor users' mental health. It uses a trained model to analyze assessments, tracking mental states over time through comparative evaluation.",
-    //     respAndAchievements: [
-    //         "Developed and optimized full-stack features ensuring adherence to industry standards for efficiency, scalability, and security.",
-    //         "Improved system reliability and enhanced user experience by refactoring legacy code and streamlining data workflows.",
-    //         "Contributed to AI integration pipelines and backend services that enabled 78% accuracy in mental health pattern detection.",
-    //         "Achieved an 85% boost in system performance through architectural optimizations and efficient resource handling."
-    //     ],
-    //     skillUtilized: [
-    //         "Programming Languages: JavaScript (ES6+), TypeScript.",
-    //         "Frameworks/Libraries: React, Node.js, Express.js.",
-    //         "Database: MongoDB, Mongoose.",
-    //         "AI & Data: Integration of AI models into backend services.",
-    //         "Soft Skills: Code Quality Enforcement, Remote Collaboration, Problem Solving."
-    //     ]
-    // }
-
 ]
