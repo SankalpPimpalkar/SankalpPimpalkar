@@ -6,7 +6,7 @@ function Work({ companyName, role, companylocation, description, respAndAchievem
     const [showState, setShowState] = useState(false)
 
     return (
-        <div className="border rounded-md dark:bg-gray-secondary bg-gray-50 dark:border-gray-tertiary border-gray-150 p-4 w-full max-w-[40rem]">
+        <div className="border rounded-md dark:bg-gray-secondary bg-gray-50 dark:border-gray-200/10 border-gray-150 p-4 w-full max-w-[40rem]">
             <div className="flex flex-col gap-4 items-start md:flex-row md:items-center md:gap-0 justify-between">
                 <span>
                     <h3 className="text-lg mb-2 font-bold dark:text-gray-200 text-gray-600">

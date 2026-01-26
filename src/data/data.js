@@ -93,11 +93,27 @@ export const projects = [
     },
     {
         id: 3,
-        name: 'Whatsapp CRM backend',
-        created_year: '2025',
-        description: 'Backend system for a CRM tailored to WhatsApp-based interactions. Manages deals, tasks, and customer data. Built for scalability and automation.',
-        source_code: 'https://github.com/SankalpPimpalkar/whatsapp-crm-backend',
-        demo: ''
+        name: 'GigFlow',
+        created_year: '2026',
+        description: 'A full-stack freelancing platform where users can browse gigs, submit proposals, and track applications. Gig owners can post gigs, review proposals, and hire freelancers. Built with React (Vite), Node.js, Express, and MongoDB.',
+        source_code: 'https://github.com/SankalpPimpalkar/GigFlow',
+        demo: 'https://gigsdekho-r0wdj.sevalla.app/'
+    },
+    {
+        id: 4,
+        name: 'Nucleus',
+        created_year: '2026',
+        description: 'A backend API for multi-organization and multi-project applications with fine-grained authorization. Separates authentication, ownership, and permissions using a modular, secure, and maintainable architecture.',
+        source_code: 'https://github.com/SankalpPimpalkar/Nucleus',
+        demo: 'https://nucleus-sand.vercel.app/'
+    },
+    {
+        id: 5,
+        name: 'Smart Vehicle Health Monitoring System',
+        created_year: '2026',
+        description: 'A backend platform to intelligently monitor and analyze vehicle health. Uses a modular, event-driven architecture with separate services for users, vehicles, OBD, and diagnostics to ensure scalability and clean service boundaries.',
+        source_code: 'https://github.com/SankalpPimpalkar/SVHMS',
+        demo: 'https://svhms.vercel.app/'
     },
 ]
 
