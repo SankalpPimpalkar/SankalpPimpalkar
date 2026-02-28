@@ -76,7 +76,7 @@ function Navbar() {
     }, [])
 
     return (
-        <nav className="fixed top-0 py-3 sm:py-5 px-5 md:px-0 inset-x-0 w-full mx-auto bg-white/95 dark:bg-gray-primary/95">
+        <nav className="fixed top-0 py-3 sm:py-5 px-5 md:px-0 inset-x-0 w-full mx-auto bg-white/80 dark:bg-gray-primary/80 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800/50 z-50">
             <div className="w-full max-w-2xl mx-auto flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
                 <div className="w-full py-1 flex items-center justify-between sm:hidden ">
                     <img className="w-10 h-10 rounded-full" src="/logo.jpeg" alt="logo" />
@@ -100,7 +100,7 @@ function Navbar() {
                             <NavLink
                                 to={nav.path}
                                 className={({ isActive }) =>
-                                    `dark:hover:bg-gray-secondary hover:bg-gray-200 w-fit p-2 rounded-md border dark:border-gray-secondary border-gray-300 text-gray-700 dark:text-gray-300 transition-colors duration-300 flex items-center gap-2 snap-end text-xs ${isActive && 'dark:bg-gray-secondary bg-gray-200 dark:text-gray-100 text-gray-600'}`
+                                    `dark:hover:bg-gray-secondary hover:bg-gray-100 w-fit p-2 rounded-xl border dark:border-gray-800 border-gray-200 text-gray-500 dark:text-gray-400 transition-all duration-300 flex items-center gap-2 snap-end text-xs font-semibold ${isActive && 'dark:bg-gray-secondary/80 bg-gray-100 dark:text-white text-gray-900 border-green-500/20 shadow-sm shadow-black/5'}`
                                 }
                             >
                                 <img className={nav.className} src={nav.icon} alt="navIcon" />

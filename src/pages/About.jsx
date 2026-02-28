@@ -4,62 +4,75 @@ import { College, CSS, Express, Git, HTML, JS, Nextjs, Nodejs, React, TailwindCS
 
 function About() {
     return (
-        <main className="mt-20">
+        <main className="mt-28 sm:mt-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <Helmet>
                 <title>About | Sankalp Pimpalkar</title>
-                <meta name="description" content="Learn more about Sankalp Pimpalkar, a full stack web developer from India with a passion for backend and frontend technologies." />
-                <meta name="keywords" content="About Sankalp, Full Stack Developer, React Developer, Django Developer" />
+                <meta name="description" content="Learn more about Sankalp Pimpalkar, a Backend Developer from India with a passion for scalable systems and cloud architecture." />
+                <meta name="keywords" content="About Sankalp, Backend Developer, Node.js Developer, Django Developer" />
                 <meta property="og:title" content="About | Sankalp Pimpalkar" />
-                <meta property="og:description" content="Background and journey of Sankalp, a full stack engineer with real-world project experience." />
+                <meta property="og:description" content="Background and journey of Sankalp, a logic-driven backend engineer." />
                 <meta property="og:image" content="https://shanky.in/logo.jpeg" />
                 <meta property="og:url" content="https://shanky.in/about" />
                 <link rel="canonical" href="https://shanky.in/about" />
             </Helmet>
 
-            <div className="hidden sm:block">
-                <img className="w-20 h-20 rounded-full" src="/logo.jpeg" alt="logo" />
+            <div className="flex items-center gap-6 mb-12">
+                <div className="relative group">
+                    <img className="w-24 h-24 rounded-2xl group-hover:rotate-3 transition-transform duration-500" src="/logo.jpeg" alt="logo" />
+                    <div className="absolute -inset-1 bg-green-500/10 rounded-2xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <div>
+                    <h1 className="text-3xl font-bold dark:text-gray-100 text-gray-800">
+                        About Me
+                    </h1>
+                    <p className="text-sm font-mono text-green-500 mt-1 uppercase tracking-[0.2em]">
+                        Systems Architect
+                    </p>
+                </div>
             </div>
 
-            <section className="mt-8 flex flex-col gap-4 items-start">
-                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
-                    I&apos;m Sankalp Pimpalkar, an Engineering Student from
-                    <Link href={College}>
-                        {' '}Terna Engineering College, Navi Mumbai{' '}
-                    </Link>.
-                    I started my journey as a web developer in 2022 and since then, I have learned a lot of technologies.
-                </p>
-                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
-                    My journey began with the basics of
-                    <Link href={HTML}>{' '}HTML{' '}</Link>,
-                    <Link href={CSS}>{' '}CSS{' '}</Link>, and
-                    <Link href={JS}>{' '}JavaScript{' '}</Link>,
-                    which laid a strong foundation for my frontend development skills. Over time, I have expanded my expertise to include modern frameworks and libraries such as
-                    <Link href={React}>{' '}React{' '}</Link>,
-                    <Link href={Nextjs}>{' '}Next.js{' '}</Link>, and
-                    <Link href={TailwindCSS}>{' '}Tailwind CSS{' '}</Link>.
-                    I am passionate about building responsive and user-friendly web applications that provide a seamless experience across different devices and platforms.
-                </p>
-                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
-                    To broaden my backend development skills, I've also started working with
-                    <Link href={Django}>{' '}Django{' '}</Link>,
-                    a powerful Python framework that has helped me understand server-side development better. Additionally, I'm currently exploring mobile app development through
-                    <Link href={ReactNative}>{' '}React Native{' '}</Link>,
-                    which allows me to leverage my React knowledge to build cross-platform mobile applications.
-                </p>
-                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
-                    Throughout my projects, I have focused on writing clean, maintainable code and adhering to best practices in web development. I have experience working with version control systems like
-                    <Link href={Git}>{' '}Git{' '}</Link>,
-                    which has helped me collaborate effectively with other developers. Additionally, I have explored backend technologies like
-                    <Link href={Nodejs}>{' '}Node.js{' '}</Link> and
-                    <Link href={Express}>{' '}Express{' '}</Link>
-                    to gain a holistic understanding of web development.
-                </p>
-                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
-                    Apart from technical skills, I am a strong advocate for continuous learning and staying updated with the latest industry trends. I actively participate in online communities, attend webinars, and contribute to open-source projects to enhance my knowledge and give back to the developer community.
-                </p>
-                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
-                    My goal is to leverage my skills and knowledge to create impactful web applications that solve real-world problems. I am excited about the opportunities in both web and mobile development, and look forward to collaborating with like-minded professionals to build innovative solutions.
-                </p>
+            <section className="flex flex-col gap-6 items-start">
+                <div className="space-y-6 text-base dark:text-gray-300 text-gray-600 leading-relaxed max-w-2xl font-normal">
+                    <p>
+                        I&apos;m <span className="dark:text-white text-gray-900 font-semibold">Sankalp Pimpalkar</span>, a Backend Developer and Engineering Student at
+                        <Link href={College}>
+                            {' '}Terna Engineering College, Navi Mumbai{' '}
+                        </Link>.
+                        My expertise lies in building high-performance server-side architectures that scale seamlessly.
+                    </p>
+
+                    <p>
+                        My journey in technology is driven by a deep curiosity about how large-scale systems manage millions of transactions. I specialize in
+                        <Link href={Nodejs}>{' '}Node.js{' '}</Link>,
+                        <Link href={Django}>{' '}Django{' '}</Link>, and
+                        <Link href={Express}>{' '}Express{' '}</Link>
+                        to create secure, versioned, and documented RESTful APIs. 
+                    </p>
+
+                    <div className="p-6 border dark:bg-gray-secondary/30 bg-gray-50 dark:border-gray-800 border-gray-200 rounded-2xl my-8">
+                        <h3 className="text-xs font-mono text-green-500 uppercase tracking-widest mb-4">Core Philosophy</h3>
+                        <p className="italic text-sm text-gray-500 dark:text-gray-400">
+                            "I believe that backend development isn't just about moving data from A to B; it's about ensuring data integrity, security, and extreme performance at every hop in the network."
+                        </p>
+                    </div>
+
+                    <p>
+                        Beyond traditional web frameworks, I enjoy exploring cloud infrastructure on
+                        <Link href={Git}>{' '}AWS{' '}</Link>,
+                        containerization with Docker, and optimizing database schemas in 
+                        <Link href={React}>{' '}PostgreSQL{' '}</Link> and <Link href={HTML}>{' '}MongoDB{' '}</Link>. 
+                        I am a strong advocate for clean code, test-driven development, and modular architecture.
+                    </p>
+
+                    <p>
+                        When I&apos;m not architecting systems, I stay active in the developer community, contributing to open-source projects and constantly iterating on personal tools to improve developer workflows.
+                    </p>
+                </div>
+
+                <div className="mt-12 flex items-center gap-4">
+                    <div className="h-[1px] w-12 bg-gray-200 dark:bg-gray-800"></div>
+                    <p className="text-xs font-mono text-gray-400 uppercase tracking-widest">End of transmission</p>
+                </div>
             </section>
         </main>
     );

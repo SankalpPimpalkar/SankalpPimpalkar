@@ -1,9 +1,9 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react"
 import Button from "../components/ui/Button"
 import Input from "../components/ui/Input"
 import { feedbackFunction, fetchFeedbacks } from "../functions/feedbackForm"
 import { Helmet } from "react-helmet"
+import { MessageSquare, ThumbsUp, Send, User, AtSign, Loader2, CheckCircle2 } from "lucide-react"
 
 function Feedback() {
 
@@ -43,6 +43,7 @@ function Feedback() {
         const isfeedbackValid = feedbackForm.name.trim() && feedbackForm.email.trim() && feedbackForm.feedback.trim()
 
         if (!isfeedbackValid) {
+            setIsPending(false);
             return;
         }
 
@@ -51,26 +52,23 @@ function Feedback() {
 
         setFeedbackForm(initialState)
         setIsPending(false);
-        console.log("Feedback submitted successfully!")
 
         setTimeout(() => {
             setResponse(false)
-        }, 3000)
+        }, 5000)
     }
 
     useEffect(() => {
         (async () => {
             const response = await fetchFeedbacks()
-
             if (response) {
                 setFeedbacks(response)
-                return
             }
-        })
+        })()
     }, [])
 
     return (
-        <main className="mt-20">
+        <main className="mt-28 sm:mt-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <Helmet>
                 <title>Feedback | Sankalp Pimpalkar</title>
                 <meta name="description" content="Send feedback or get in touch with Sankalp Pimpalkar. Let's collaborate or discuss projects." />
@@ -82,148 +80,153 @@ function Feedback() {
                 <link rel="canonical" href="https://shanky.in/feedback" />
             </Helmet>
 
-            <div>
-                <h1 className="text-3xl font-bold dark:text-gray-200 text-gray-800">
-                    Feedbacks
-                </h1>
+            <div className="flex flex-col gap-12">
+                <section>
+                    <div className="flex items-center gap-3 mb-8">
+                        <MessageSquare className="text-green-500" size={24} />
+                        <h1 className="text-3xl font-bold dark:text-gray-100 text-gray-800">
+                            Wall of Feedback
+                        </h1>
+                    </div>
 
-                <div className="mt-5 divide-y divide-yellow-400 space-y-5">
-                    {
-                        feedbacks?.map(feedback => (
-                            <div key={feedback.$id}>
-                                <span>
-                                    <h1 className="font-bold text-xl text-gray-primary dark:text-gray-50 pt-3">
-                                        {feedback.name}
-                                    </h1>
-                                    <p className="text-yellow-500 dark:text-yellow-400 font-medium">
-                                        {feedback.email}
-                                    </p>
-                                </span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {feedbacks?.map(feedback => (
+                            <div key={feedback.$id} className="p-6 border dark:bg-gray-secondary/20 bg-white dark:border-gray-800 border-gray-200 rounded-2xl hover:border-green-500/20 transition-all duration-300 group">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-400">
+                                        <User size={16} />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-sm dark:text-gray-100 text-gray-800">
+                                            {feedback.name}
+                                        </h3>
+                                        <p className="text-[10px] font-mono text-green-500 uppercase">
+                                            {feedback.type}
+                                        </p>
+                                    </div>
+                                </div>
 
-                                <p className="mt-3 text-lg">
-                                    {feedback.feedback}
+                                <p className="text-sm dark:text-gray-400 text-gray-600 leading-relaxed italic">
+                                    "{feedback.feedback}"
                                 </p>
                             </div>
-                        ))
-                    }
-                    {
-                        !feedbacks.length &&
-                        (
-                            <p className="text-yellow-400">
-                                No feedbacks yet be the first one
-                            </p>
-                        )
-                    }
-                </div>
-
-            </div>
-
-            <div className="mt-6">
-                <h1 className="text-3xl font-bold dark:text-gray-200 text-gray-800">
-                    Add your feedback
-                </h1>
-
-                <p className="mt-5 w-full font-medium dark:text-gray-200 text-gray-600 text-lg leading-relaxed">
-                    Thank you for visiting my website. Your feedback helps me improve and provide a better experience for future visitors.
-                    Please take a moment to share your thoughts 😇
-                </p>
-
-                {
-                    !response ? (
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4 w-full">
-                            <Input
-                                id="name"
-                                value={feedbackForm.name}
-                                onChange={handleChange}
-                                placeholder="Enter your name"
-                            />
-
-                            <Input
-                                id="email"
-                                value={feedbackForm.email}
-                                onChange={handleChange}
-                                placeholder="Enter your email"
-                            />
-
-                            <div className="flex flex-wrap items-center gap-7">
-                                <span className="flex items-center gap-2">
-                                    <input
-                                        id="comment"
-                                        className="accent-gray-500 dark:accent-gray-secondary"
-                                        name="feedback-type"
-                                        checked={feedbackForm.type === "comment"}
-                                        value="comment"
-                                        onChange={handleChange}
-                                        type="radio" />
-                                    <label className="font-medium text-sm text-gray-400 cursor-pointer" htmlFor="comment">
-                                        Comment
-                                    </label>
-                                </span>
-
-                                <span className="flex items-center gap-2">
-                                    <input
-                                        id="suggestion"
-                                        className="accent-gray-500 dark:accent-gray-secondary"
-                                        name="feedback-type"
-                                        checked={feedbackForm.type === "suggestion"}
-                                        value="suggestion"
-                                        onChange={handleChange}
-                                        type="radio" />
-                                    <label className="font-medium text-sm text-gray-400 cursor-pointer" htmlFor="suggestion">
-                                        Suggestion
-                                    </label>
-                                </span>
-                            </div>
-
-                            <textarea
-                                id="feedback"
-                                value={feedbackForm.feedback}
-                                onChange={handleChange}
-                                className="rounded-md border dark:border-gray-dark dark:bg-gray-dark bg-gray-300/30 outline-none py-2 px-3 text-base text-gray-800 dark:text-gray-300 w-full caret-yellow-300 dark:focus:border-yellow-300 transition-all duration-300 placeholder:text-gray-400 dark:placeholder:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-300/10"
-                                placeholder="Comments / Suggestions"
-                                rows="4"
-                            />
-
-                            <div className="flex items-center gap-2">
-                                <Button
-                                    onClick={handleClear}
-                                    className="dark:text-gray-300 text-gray-800 bg-gray-100 hover:bg-gray-200 font-medium py-2 px-4">
-                                    Clear
-                                </Button>
-
-                                <Button
-                                    type="submit"
-                                    disabled={isPending}
-                                    className="dark:text-gray-300 text-gray-800 bg-gray-100 hover:bg-gray-200 font-medium py-2 px-4 flex items-center gap-2
-                                disabled:bg-gray-400
-                                disabled:text-gray-700
-                                dark:disabled:bg-gray-tertiary dark:disabled:text-gray-400">
-                                    {
-                                        isPending && (
-                                            <img className="w-5 dark:invert animate-spin invert-0" src="/loader.png" alt="loader" />
-                                        )
-                                    }
-                                    Submit
-                                </Button>
-                            </div>
-                        </form>
-                    ) :
-
-                        (
-                            <div className="mt-10 w-full max-w-md bg-green-500/30 dark:bg-green-600/30 border border-green-400 dark:border-green-500 p-3 rounded">
-                                <h2 className="text-lg font-semibold dark:text-gray-200 text-gray-800 flex items-center gap-2">
-                                    <img className="w-5 h-5" src="/check.png" alt="check-icon" />
-                                    Feedback received
-                                </h2>
-
-                                <p className="mt-2 w-full font-medium dark:text-gray-300 text-gray-600 text-base leading-relaxed">
-                                    Thank you for your feedback! It helps me continue to improve and grow. Your input is greatly appreciated.
+                        ))}
+                        
+                        {!feedbacks.length && (
+                            <div className="col-span-full py-12 text-center border-2 border-dashed dark:border-gray-800 border-gray-100 rounded-3xl">
+                                <p className="text-gray-400 font-mono text-xs uppercase tracking-widest">
+                                    The wall is waiting for its first stone.
                                 </p>
-                            </div >
-                        )
-                }
+                            </div>
+                        )}
+                    </div>
+                </section>
+
+                <section className="p-8 border dark:bg-gray-secondary/10 bg-gray-50/50 dark:border-gray-800 border-gray-200 rounded-3xl">
+                    <div className="max-w-xl">
+                        <h2 className="text-2xl font-bold dark:text-gray-100 text-gray-800 mb-2">
+                            Drop a Note
+                        </h2>
+                        <p className="text-sm dark:text-gray-400 text-gray-600 mb-8 font-normal">
+                            Have a suggestion or just want to say hi? I&apos;d love to hear from you.
+                        </p>
+
+                        {!response ? (
+                            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="relative group">
+                                        <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-green-500 transition-colors" size={16} />
+                                        <input
+                                            id="name"
+                                            value={feedbackForm.name}
+                                            onChange={handleChange}
+                                            required
+                                            className="w-full pl-10 pr-4 py-3 rounded-xl border dark:bg-gray-800/50 bg-white dark:border-gray-700 border-gray-200 dark:text-white text-gray-900 focus:border-green-500 dark:focus:border-green-500 outline-none transition-all text-sm"
+                                            placeholder="Your Name"
+                                        />
+                                    </div>
+                                    <div className="relative group">
+                                        <AtSign className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-green-500 transition-colors" size={16} />
+                                        <input
+                                            id="email"
+                                            type="email"
+                                            value={feedbackForm.email}
+                                            onChange={handleChange}
+                                            required
+                                            className="w-full pl-10 pr-4 py-3 rounded-xl border dark:bg-gray-800/50 bg-white dark:border-gray-700 border-gray-200 dark:text-white text-gray-900 focus:border-green-500 dark:focus:border-green-500 outline-none transition-all text-sm"
+                                            placeholder="Your Email"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-6 py-2">
+                                    <label className="flex items-center gap-2 cursor-pointer group">
+                                        <input
+                                            type="radio"
+                                            name="feedback-type"
+                                            checked={feedbackForm.type === "comment"}
+                                            value="comment"
+                                            onChange={handleChange}
+                                            className="w-4 h-4 accent-green-500"
+                                        />
+                                        <span className="text-xs font-medium dark:text-gray-400 text-gray-600 group-hover:text-green-500 transition-colors">Comment</span>
+                                    </label>
+                                    <label className="flex items-center gap-2 cursor-pointer group">
+                                        <input
+                                            type="radio"
+                                            name="feedback-type"
+                                            checked={feedbackForm.type === "suggestion"}
+                                            value="suggestion"
+                                            onChange={handleChange}
+                                            className="w-4 h-4 accent-green-500"
+                                        />
+                                        <span className="text-xs font-medium dark:text-gray-400 text-gray-600 group-hover:text-green-500 transition-colors">Suggestion</span>
+                                    </label>
+                                </div>
+
+                                <textarea
+                                    id="feedback"
+                                    value={feedbackForm.feedback}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full p-4 rounded-xl border dark:bg-gray-800/50 bg-white dark:border-gray-700 border-gray-200 dark:text-white text-gray-900 focus:border-green-500 dark:focus:border-green-500 outline-none transition-all text-sm resize-none"
+                                    placeholder="Tell me what's on your mind..."
+                                    rows="4"
+                                />
+
+                                <div className="flex items-center gap-3 mt-4">
+                                    <button
+                                        type="submit"
+                                        disabled={isPending}
+                                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white font-bold py-3 px-8 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/20"
+                                    >
+                                        {isPending ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
+                                        Submit
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={handleClear}
+                                        className="py-3 px-6 rounded-xl border dark:border-gray-700 border-gray-200 dark:text-gray-300 text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-sm font-semibold"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            </form>
+                        ) : (
+                            <div className="py-10 text-center animate-in zoom-in duration-500">
+                                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/10 text-green-500 mb-4">
+                                    <CheckCircle2 size={32} />
+                                </div>
+                                <h3 className="text-xl font-bold dark:text-white text-gray-900 mb-2">Feedback Received!</h3>
+                                <p className="text-sm dark:text-gray-400 text-gray-600">
+                                    Thank you for your thoughts. I appreciate you taking the time!
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                </section>
             </div>
-        </main >
+        </main>
     )
 }
 
