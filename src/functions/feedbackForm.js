@@ -1,5 +1,6 @@
 import { collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "./firebase";
+import { sendDiscordNotification } from "./notifications";
 
 const FEEDBACK_COLLECTION = "feedbacks";
 
@@ -12,6 +13,8 @@ export const feedbackFunction = async (form) => {
         const docRef = await addDoc(collection(db, FEEDBACK_COLLECTION), data);
 
         if (docRef.id) {
+            // Send notification asynchronously
+            sendDiscordNotification({ id: docRef.id, ...data });
             return { id: docRef.id, ...data };
         }
 
