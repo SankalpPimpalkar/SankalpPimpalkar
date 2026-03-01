@@ -49,10 +49,12 @@ function Feedback() {
 
         try {
             const response = await feedbackFunction(feedbackForm)
-            setResponse(response)
-
             if (response) {
+                setFeedbacks(prev => [response, ...prev])
+                setResponse(true)
                 setFeedbackForm(initialState)
+            } else {
+                setResponse(false)
             }
         } catch (error) {
             console.error("Submission error:", error)

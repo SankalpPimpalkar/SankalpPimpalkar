@@ -5,25 +5,26 @@ const FEEDBACK_COLLECTION = "feedbacks";
 
 export const feedbackFunction = async (form) => {
     try {
-        const docRef = await addDoc(collection(db, FEEDBACK_COLLECTION), {
+        const data = {
             ...form,
             createdAt: new Date().toISOString()
-        });
+        }
+        const docRef = await addDoc(collection(db, FEEDBACK_COLLECTION), data);
 
         if (docRef.id) {
-            return true;
+            return { id: docRef.id, ...data };
         }
 
-        return false;
+        return null;
     } catch (error) {
         console.error("Error adding feedback: ", error);
-        return false;
+        return null;
     }
 }
 
 export const fetchFeedbacks = async () => {
     try {
-        const q = query(collection(db, FEEDBACK_COLLECTION), orderBy("createdAt", "asc"));
+        const q = query(collection(db, FEEDBACK_COLLECTION), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
 
         const feedbacks = [];
