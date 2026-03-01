@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "appwrite": "^17.0.2",
     "esbuild": "^0.25.3",
+    "firebase": "^12.10.0",
     "lucide-react": "^0.506.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

@@ -47,15 +47,22 @@ function Feedback() {
             return;
         }
 
-        const response = await feedbackFunction(feedbackForm)
-        setResponse(response)
+        try {
+            const response = await feedbackFunction(feedbackForm)
+            setResponse(response)
 
-        setFeedbackForm(initialState)
-        setIsPending(false);
-
-        setTimeout(() => {
+            if (response) {
+                setFeedbackForm(initialState)
+            }
+        } catch (error) {
+            console.error("Submission error:", error)
             setResponse(false)
-        }, 5000)
+        } finally {
+            setIsPending(false);
+            setTimeout(() => {
+                setResponse(false)
+            }, 5000)
+        }
     }
 
     useEffect(() => {
@@ -91,7 +98,7 @@ function Feedback() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {feedbacks?.map(feedback => (
-                            <div key={feedback.$id} className="p-6 border dark:bg-gray-secondary/20 bg-white dark:border-gray-800 border-gray-200 rounded-2xl hover:border-green-500/20 transition-all duration-300 group">
+                            <div key={feedback.id} className="p-6 border dark:bg-gray-secondary/20 bg-white dark:border-gray-800 border-gray-200 rounded-2xl hover:border-green-500/20 transition-all duration-300 group">
                                 <div className="flex items-center gap-3 mb-4">
                                     <div className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-400">
                                         <User size={16} />

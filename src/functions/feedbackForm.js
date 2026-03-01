@@ -1,61 +1,42 @@
-/* eslint-disable no-unused-vars */
-import { Client, Databases, ID, Query } from "appwrite";
+import { collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
+import { db } from "./firebase";
 
-// For future purposes
-export const config = {
-    project_id: String(import.meta.env.VITE_APPWRITE_ID),
-    endpoint: String(import.meta.env.VITE_APPWRITE_ENDPOINT),
-    database_id: String(import.meta.env.VITE_APPWRITE_DB),
-    feedback_collection_id: String(import.meta.env.VITE_APPWRITE_COLLECTION_FEEDBACK)
-}
-
-export const client = new Client()
-    .setEndpoint(config.endpoint)
-    .setProject(config.project_id)
-
-export const database = new Databases(client)
+const FEEDBACK_COLLECTION = "feedbacks";
 
 export const feedbackFunction = async (form) => {
     try {
+        const docRef = await addDoc(collection(db, FEEDBACK_COLLECTION), {
+            ...form,
+            createdAt: new Date().toISOString()
+        });
 
-        const feedback = await database.createDocument(
-            config.database_id,
-            config.feedback_collection_id,
-            ID.unique(),
-            form
-        )
-
-        if (feedback) {
+        if (docRef.id) {
             return true;
         }
 
         return false;
-
     } catch (error) {
-        console.error(error)
+        console.error("Error adding feedback: ", error);
         return false;
     }
 }
 
 export const fetchFeedbacks = async () => {
     try {
+        const q = query(collection(db, FEEDBACK_COLLECTION), orderBy("createdAt", "asc"));
+        const querySnapshot = await getDocs(q);
 
-        const feedbacks = await database.listDocuments(
-            config.database_id,
-            config.feedback_collection_id,
-            [
-                Query.orderAsc('$createdAt')
-            ]
-        )
+        const feedbacks = [];
+        querySnapshot.forEach((doc) => {
+            feedbacks.push({
+                id: doc.id,
+                ...doc.data()
+            });
+        });
 
-        if (feedbacks) {
-            return feedbacks.documents
-        }
-
-        return []
-
+        return feedbacks;
     } catch (error) {
-        console.error(error)
-        return []
+        console.error("Error fetching feedbacks: ", error);
+        return [];
     }
 }
