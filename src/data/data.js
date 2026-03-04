@@ -1,4 +1,4 @@
-export const tagLine = `Backend Developer specializing in scalable RESTful APIs, system design, and cloud architecture. I build robust infrastructures using Node.js, Django, and AWS.`
+export const tagLine = `Systems Architect & Full Stack Developer specializing in AI integration, mobile applications, and scalable cloud architectures. I build robust, high-performance systems using Node.js, React Native, and LLM frameworks.`
 
 export const skills = [
     {
@@ -59,15 +59,6 @@ export const projects = [
         description: 'Web-based cloud file management system supporting secure authentication and multipart uploads of files up to 10GB with real-time tracking.',
         source_code: 'https://github.com/SankalpPimpalkar/S3-Bucket-Storage-Manager',
         demo: 'https://s3-bucket-storage-manager.vercel.app/'
-    },
-    {
-        id: 3,
-        name: 'GigFlow - Freelancing Platform',
-        created_year: '2026',
-        tech: 'Node.js, Express.js, MongoDB, JWT, React.js',
-        description: 'Full-stack platform enabling gig browsing, bidding, and hiring workflows. Designed secure backend endpoints and token-based authentication.',
-        source_code: 'https://github.com/SankalpPimpalkar/GigFlow',
-        demo: 'https://gigsdekho-r0wdj.sevalla.app/'
     }
 ]
 

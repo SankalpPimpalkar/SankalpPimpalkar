@@ -7,16 +7,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Gray shades
-        'gray-primary': '#181818',
-        'gray-secondary': '#2c2c2c',
-        'gray-tertiary': '#505050',
-        'gray-dark': '#242424',
+        // Neutral zinc shades
+        'zinc-primary': '#181818',
+        'zinc-secondary': '#2c2c2c',
+        'zinc-tertiary': '#505050',
+        'zinc-dark': '#242424',
       },
       fontFamily: {
         // Fonts goes here
       },
-      screens : {
+      screens: {
         'xs': '390px'
       }
     },

@@ -2,27 +2,81 @@ import Project from "../components/ui/Project"
 import Work from "../components/ui/Work"
 import { skills, works, projects, tagLine } from "../data/data"
 import { Helmet } from "react-helmet"
+import { useState, useEffect } from "react"
+import { getAllBlogs } from "../functions/blogService"
+import { Link } from "react-router-dom"
+import { Calendar, ChevronRight, ArrowRight } from "lucide-react"
 
 import * as LucideIcons from "lucide-react"
 
 function Home() {
+
+    const [blogs, setBlogs] = useState([]);
+
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            try {
+                const allBlogs = await getAllBlogs();
+                setBlogs(allBlogs.slice(0, 3));
+            } catch (error) {
+                console.error("Error fetching blogs for home:", error);
+            }
+        };
+        fetchBlogs();
+    }, []);
+
+    const timeAgo = (date) => {
+        if (!date) return "";
+        const now = new Date();
+        const seconds = Math.floor((now - date) / 1000);
+        
+        let interval = Math.floor(seconds / 31536000);
+        if (interval >= 1) return interval + "y ago";
+        interval = Math.floor(seconds / 2592000);
+        if (interval >= 1) return interval + "mo ago";
+        interval = Math.floor(seconds / 86400);
+        if (interval >= 1) return interval + "d ago";
+        interval = Math.floor(seconds / 3600);
+        if (interval >= 1) return interval + "h ago";
+        interval = Math.floor(seconds / 60);
+        if (interval >= 1) return interval + "m ago";
+        return "now";
+    };
 
     const LucideIcon = ({ name, ...props }) => {
         const Icon = LucideIcons[name] || LucideIcons.HelpCircle;
         return <Icon {...props} />;
     };
 
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sankalp Pimpalkar",
+        "jobTitle": "Backend Developer",
+        "url": "https://shanky.in",
+        "sameAs": [
+            "https://github.com/sankalppimpalkar",
+            "https://linkedin.com/in/sankalppimpalkar"
+        ],
+        "description": "Backend Developer specializing in Node.js, Django, and cloud architecture."
+    };
+
     return (
         <main>
             <Helmet>
-                <title>Sankalp Pimpalkar | Backend Developer</title>
-                <meta name="description" content="Portfolio of Sankalp Pimpalkar, a Backend Developer specializing in Node.js, Django, and AWS." />
-                <meta name="keywords" content="Sankalp Pimpalkar, Backend Developer, Node.js, Django, AWS, Portfolio" />
+                <title>Sankalp Pimpalkar | Full Stack & AI Engineer</title>
+                <meta name="description" content="Portfolio of Sankalp Pimpalkar, a Full Stack & AI Engineer specializing in Node.js, React Native, and AWS. Building scalable architectures and intelligent systems." />
+                <meta name="keywords" content="Sankalp Pimpalkar, Full Stack Developer, AI Engineer, Mobile Developer, React Native, Node.js, Systems Architect, Portfolio" />
                 <meta property="og:title" content="Sankalp Pimpalkar | Portfolio" />
-                <meta property="og:description" content="Explore Sankalp's projects, experience, and skills in backend systems." />
+                <meta property="og:description" content="Explore Sankalp's projects, experience, and insights on backend systems and architecture." />
                 <meta property="og:image" content="https://shanky.in/logo.jpeg" />
                 <meta property="og:url" content="https://shanky.in/" />
+                <meta property="og:type" content="website" />
+                <meta name="twitter:card" content="summary_large_image" />
                 <link rel="canonical" href="https://shanky.in/" />
+                <script type="application/ld+json">
+                    {JSON.stringify(structuredData)}
+                </script>
             </Helmet>
 
 
@@ -39,30 +93,30 @@ function Home() {
                         </span>
                     </div>
                     
-                    <h1 className="text-4xl font-bold dark:text-gray-100 text-gray-800 tracking-tight">
+                    <h1 className="text-4xl font-bold dark:text-zinc-100 text-zinc-800 tracking-tight">
                         Sankalp Pimpalkar
                     </h1>
                     
                     <h2 className="text-xl font-mono text-green-500 mt-1 font-semibold flex items-center gap-2">
-                        <span className="text-gray-400">&gt;</span> Backend Developer
+                        <span className="text-zinc-400">&gt;</span> Full Stack & AI Engineer
                     </h2>
 
-                    <p className="w-full max-w-md mt-4 text-base dark:text-gray-400 text-gray-600 leading-relaxed font-normal">
+                    <p className="w-full max-w-md mt-4 text-base dark:text-zinc-400 text-zinc-600 leading-relaxed font-normal">
                         {tagLine}
                     </p>
 
                     <div className="flex items-center gap-3 mt-6">
-                        <a href='/Sankalp-Pimpalkar-Resume.pdf' target="_blank" className="dark:bg-gray-secondary dark:text-gray-200 bg-gray-100 text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-200/20 px-5 py-2.5 text-xs font-medium rounded-lg border dark:border-gray-200/5 transition-all duration-300">
+                        <a href='/Sankalp-Pimpalkar-Resume.pdf' target="_blank" className="dark:bg-zinc-secondary dark:text-zinc-200 bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-200/20 px-5 py-2.5 text-xs font-medium rounded-lg border dark:border-zinc-200/5 transition-all duration-300">
                             View Resume
                         </a>
                         <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                        <span className="text-[10px] font-mono text-gray-500 dark:text-gray-500 uppercase tracking-wider">Available for projects</span>
+                        <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-500 uppercase tracking-wider">Available for projects</span>
                     </div>
                 </div>
             </section>
 
             <section className="mt-12">
-                <h3 className="text-xl font-bold dark:text-gray-200 text-gray-800">
+                <h3 className="text-xl font-bold dark:text-zinc-200 text-zinc-800">
                     Specialties
                 </h3>
 
@@ -75,11 +129,11 @@ function Home() {
                             </h4>
                             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                                 {category.items.map((skill) => (
-                                    <li key={skill.name} className="flex items-center gap-3 border dark:bg-gray-secondary/30 bg-white dark:border-gray-800 border-gray-200/60 p-3 rounded-xl hover:border-green-500/30 transition-all duration-300 group">
-                                        <div className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 group-hover:text-green-500 transition-colors">
+                                    <li key={skill.name} className="flex items-center gap-3 border dark:bg-zinc-800/20 bg-zinc-50/50 dark:border-white/5 border-zinc-200/60 p-3 rounded-xl hover:-translate-y-0.5 transition-all duration-300 group">
+                                        <div className="p-2 rounded-lg bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-zinc-400 group-hover:text-green-500 transition-colors">
                                             <LucideIcon name={skill.icon} size={18} strokeWidth={2} />
                                         </div>
-                                        <p className="text-sm font-medium dark:text-gray-300 text-gray-700">
+                                        <p className="text-sm font-medium dark:text-zinc-300 text-zinc-700">
                                             {skill.name}
                                         </p>
                                     </li>
@@ -91,7 +145,7 @@ function Home() {
             </section>
 
             <section className="mt-8">
-                <h3 className="text-xl font-bold dark:text-gray-200 text-gray-600">
+                <h3 className="text-xl font-bold dark:text-zinc-200 text-zinc-600">
                     My Work
                 </h3>
 
@@ -113,9 +167,54 @@ function Home() {
                 </ul>
             </section>
 
+            {blogs.length > 0 && (
+                <section className="mt-8">
+                    <div className="flex justify-between items-end mb-6">
+                        <h3 className="text-xl font-bold dark:text-zinc-200 text-zinc-600">
+                            Latest Articles
+                        </h3>
+                        <Link to="/blogs" className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-green-500 hover:text-green-600 transition-colors group">
+                            Read All <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                        </Link>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-3">
+                        {blogs.map((blog) => (
+                            <Link 
+                                key={blog.id} 
+                                to={`/blogs/${blog.slug || blog.id}`}
+                                className="group block dark:bg-zinc-800/20 bg-zinc-50/50 border dark:border-white/5 border-zinc-200/60 p-5 rounded-2xl hover:-translate-y-0.5 transition-all duration-300"
+                            >
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <span className="px-1.5 py-0.5 rounded bg-green-500/10 text-green-500 text-[8px] font-mono tracking-widest uppercase border border-green-500/20">
+                                                {blog.category}
+                                            </span>
+                                            <span className="text-[8px] font-mono text-zinc-500 uppercase flex items-center gap-1">
+                                                <Calendar size={8} />
+                                                {timeAgo(blog.createdAt)}
+                                            </span>
+                                        </div>
+                                        <h4 className="text-sm font-bold dark:text-zinc-100 text-zinc-800 group-hover:text-green-500 transition-colors line-clamp-1">
+                                            {blog.title}
+                                        </h4>
+                                        <p className="mt-2 text-xs dark:text-zinc-400 text-zinc-500 line-clamp-2 leading-relaxed font-normal">
+                                            {blog.content.find(b => b.type === 'paragraph' || b.type === 'text')?.content || "Explore the full article to learn more..."}
+                                        </p>
+                                    </div>
+                                    <div className="flex items-center text-[9px] uppercase tracking-widest font-bold text-zinc-400 group-hover:text-zinc-100 transition-colors">
+                                        Open <ChevronRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+            )}
 
             <section className="mt-8">
-                <h3 className="text-xl font-bold dark:text-gray-200 text-gray-600">
+                <h3 className="text-xl font-bold dark:text-zinc-200 text-zinc-600">
                     Work Experience
                 </h3>
 

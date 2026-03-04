@@ -53,7 +53,7 @@ function Carousel({ children, className = "" }) {
             {showPrev && (
                 <button
                     onClick={scrollLeft}
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-400/80 dark:bg-gray-secondary/80 px-1.5 py-1 rounded-full shadow-md z-10"
+                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-zinc-400/80 dark:bg-zinc-secondary/80 px-1.5 py-1 rounded-full shadow-md z-10"
                 >
                     <ChevronLeft width={20} />
                 </button>
@@ -67,7 +67,7 @@ function Carousel({ children, className = "" }) {
             {showNext && (
                 <button
                     onClick={scrollRight}
-                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-400/80 dark:bg-gray-secondary/80 px-1.5 py-1 rounded-full shadow-md z-10"
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-zinc-400/80 dark:bg-zinc-secondary/80 px-1.5 py-1 rounded-full shadow-md z-10"
                 >
                     <ChevronRight width={20} />
                 </button>

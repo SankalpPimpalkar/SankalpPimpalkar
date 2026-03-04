@@ -29,7 +29,14 @@ function getYear(dateString) {
     return date.getFullYear(); // Extract and return the year
 }
 
+function formatDate(date) {
+    if (!date) return "";
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(date).toLocaleDateString(undefined, options);
+}
+
 export {
     timeAgo,
-    getYear
+    getYear,
+    formatDate
 }

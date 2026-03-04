@@ -37,17 +37,17 @@ function Loader() {
                 <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative group">
                         <div className="absolute -inset-4 bg-green-500/20 rounded-full blur-md animate-pulse"></div>
-                        <div className="relative bg-white dark:bg-gray-primary p-5 rounded-2xl border border-green-500/30 shadow-lg shadow-green-500/10">
+                        <div className="relative bg-white dark:bg-zinc-primary p-5 rounded-2xl border border-green-500/30 shadow-lg shadow-green-500/10">
                             <Terminal className="text-green-500 animate-bounce" size={32} />
                         </div>
                     </div>
                 </div>
 
                 {/* Satellite Icons */}
-                <div className="absolute -top-4 -right-4 bg-white dark:bg-gray-primary p-2 rounded-lg border border-gray-100 dark:border-gray-800 animate-bounce delay-100 shadow-sm">
+                <div className="absolute -top-4 -right-4 bg-white dark:bg-zinc-primary p-2 rounded-lg border border-zinc-100 dark:border-zinc-800 animate-bounce delay-100 shadow-sm">
                     <Database size={14} className="text-green-500/70" />
                 </div>
-                <div className="absolute -bottom-2 -left-4 bg-white dark:bg-gray-primary p-2 rounded-lg border border-gray-100 dark:border-gray-800 animate-bounce delay-300 shadow-sm">
+                <div className="absolute -bottom-2 -left-4 bg-white dark:bg-zinc-primary p-2 rounded-lg border border-zinc-100 dark:border-zinc-800 animate-bounce delay-300 shadow-sm">
                     <Server size={14} className="text-green-500/70" />
                 </div>
             </div>
@@ -59,12 +59,12 @@ function Loader() {
                         System Loading
                     </h2>
                 </div>
-                <p className="font-mono text-[11px] text-gray-400 dark:text-gray-500 tracking-wider">
+                <p className="font-mono text-[11px] text-zinc-400 dark:text-zinc-500 tracking-wider">
                     {text}
                 </p>
                 
                 {/* Progress Bar Mockup */}
-                <div className="mt-6 w-48 h-[2px] bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden relative">
+                <div className="mt-6 w-48 h-[2px] bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden relative">
                     <div className="absolute inset-y-0 left-0 bg-green-500 animate-[loading_2s_infinite_ease-in-out]"></div>
                 </div>
             </div>

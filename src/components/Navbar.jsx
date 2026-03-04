@@ -1,44 +1,40 @@
 import { NavLink } from "react-router-dom"
 import Button from "./ui/Button"
 import { useEffect, useState } from "react"
-import { Github } from "../data/links"
+import { Github as GithubLink } from "../data/links"
 import Carousel from "./ui/Carousel"
+import { Home, User, FileText, MessageSquare, Github, Sun, Moon } from "lucide-react"
 
 const navs = [
     {
         id: 1,
         name: "Home",
         path: "/",
-        icon: "/house.png",
-        className: "w-4 h-4"
+        icon: Home,
     },
     {
         id: 2,
         name: "About",
         path: "/about",
-        icon: "/about.png",
-        className: "w-4 h-4"
+        icon: User,
     },
-    // {
-    //     id: 3,
-    //     name: "Blogs",
-    //     path: "/blogs",
-    //     icon: "/article.png",
-    //     className: "w-4 h-4"
-    // },
+    {
+        id: 3,
+        name: "Blogs",
+        path: "/blogs",
+        icon: FileText,
+    },
     {
         id: 4,
-        name: "Feedback",
-        path: "/feedback",
-        icon: "/feedback.png",
-        className: "w-4 h-4"
+        name: "Community & Clients",
+        path: "/community",
+        icon: MessageSquare,
     },
     {
         id: 5,
         name: "Github",
-        path: Github,
-        icon: "/github.png",
-        className: "w-4 h-4 dark:invert"
+        path: GithubLink,
+        icon: Github,
     },
 ]
 
@@ -76,20 +72,16 @@ function Navbar() {
     }, [])
 
     return (
-        <nav className="fixed top-0 py-3 sm:py-5 px-5 md:px-0 inset-x-0 w-full mx-auto bg-white/80 dark:bg-gray-primary/80 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800/50 z-50">
+        <nav className="fixed top-0 py-3 sm:py-5 px-5 md:px-0 inset-x-0 w-full mx-auto bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-b border-zinc-100 dark:border-zinc-800/50 z-50">
             <div className="w-full max-w-2xl mx-auto flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
                 <div className="w-full py-1 flex items-center justify-between sm:hidden ">
                     <img className="w-10 h-10 rounded-full" src="/logo.jpeg" alt="logo" />
 
-                    <Button onClick={handleTheme} className="gap-0 rounded-[30rem] px-2 py-2">
+                    <Button onClick={handleTheme} className="gap-0 rounded-full w-10 h-10 p-0 flex items-center justify-center border border-zinc-100 dark:border-zinc-800 bg-transparent">
                         {
                             !isdarkMode ?
-                                (
-                                    <img className="w-4 h-4" src="/sun.png" alt="light-mode" />
-                                ) :
-                                (
-                                    <img className="w-4 h-4" src="/moon.png" alt="dark-mode" />
-                                )
+                                <Sun size={18} className="text-zinc-600" /> :
+                                <Moon size={18} className="text-zinc-400" />
                         }
                     </Button>
                 </div>
@@ -100,25 +92,21 @@ function Navbar() {
                             <NavLink
                                 to={nav.path}
                                 className={({ isActive }) =>
-                                    `dark:hover:bg-gray-secondary hover:bg-gray-100 w-fit p-2 rounded-xl border dark:border-gray-800 border-gray-200 text-gray-500 dark:text-gray-400 transition-all duration-300 flex items-center gap-2 snap-end text-xs font-semibold ${isActive && 'dark:bg-gray-secondary/80 bg-gray-100 dark:text-white text-gray-900 border-green-500/20 shadow-sm shadow-black/5'}`
+                                    `dark:hover:bg-zinc-800 hover:bg-zinc-100 w-fit p-2 px-3 rounded-xl border dark:border-zinc-800 border-zinc-200 text-zinc-500 dark:text-zinc-400 transition-all duration-300 flex items-center gap-2 snap-end text-xs font-semibold ${isActive && 'dark:bg-zinc-800/80 bg-zinc-100 dark:text-white text-zinc-900 border-zinc-300 dark:border-zinc-700 shadow-sm'}`
                                 }
                             >
-                                <img className={nav.className} src={nav.icon} alt="navIcon" />
+                                <nav.icon size={14} strokeWidth={2.5} />
                                 <p>{nav.name}</p>
                             </NavLink>
                         </li>
                     ))}
                 </Carousel>
 
-                <Button onClick={handleTheme} className="gap-0 hidden sm:block w-14 rounded-[30rem] px-2 py-2">
+                <Button onClick={handleTheme} className="gap-0 hidden sm:flex w-10 h-10 rounded-full p-0 items-center justify-center border dark:border-zinc-800 border-zinc-200 bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800">
                     {
                         !isdarkMode ?
-                            (
-                                <img className="w-4 h-4" src="/sun.png" alt="light-mode" />
-                            ) :
-                            (
-                                <img className="w-4 h-4" src="/moon.png" alt="dark-mode" />
-                            )
+                            <Sun size={18} className="text-zinc-600" /> :
+                            <Moon size={18} className="text-zinc-400" />
                     }
                 </Button>
             </div>
