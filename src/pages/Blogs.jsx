@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getAllBlogs, getCategories } from "../functions/blogService";
-import { Search, Calendar, ChevronRight, Hash } from "lucide-react";
+import { Search, Calendar, ChevronRight, Heart } from "lucide-react";
 import { timeAgo } from "../functions/formatDate";
 import { Helmet } from "react-helmet";
 
@@ -68,26 +68,26 @@ function Blogs() {
                 </p>
             </header>
 
-            <div className="flex flex-col sm:flex-row gap-3 mb-8">
-                <div className="relative flex-1">
+            <div className="flex flex-col gap-5 mb-10">
+                <div className="relative w-full">
                     <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" size={16} />
                     <input
                         type="text"
                         placeholder="Search articles..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 bg-zinc-50 dark:bg-zinc-secondary/20 border border-zinc-100 dark:border-white/5 rounded-xl focus:ring-1 focus:ring-zinc-300 dark:focus:ring-white/10 transition-all outline-none text-sm"
+                        className="w-full pl-10 pr-4 py-2 bg-zinc-50 dark:bg-zinc-secondary/20 border border-zinc-100 dark:border-white/5 rounded-xl focus:ring-1 focus:ring-zinc-300 dark:focus:ring-white/10 transition-all outline-none text-sm h-10"
                     />
                 </div>
-                <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar sm:pb-0">
+                <div className="flex gap-2 overflow-x-auto no-scrollbar py-1">
                     {categories.map(cat => (
                         <button
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap ${
+                            className={`px-4 h-9 rounded-xl text-xs font-medium transition-all whitespace-nowrap flex items-center justify-center ${
                                 activeCategory === cat
                                 ? "bg-black dark:bg-white text-white dark:text-black shadow-sm"
-                                : "bg-zinc-50 dark:bg-zinc-800/20 text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800/40"
+                                : "bg-zinc-50 dark:bg-zinc-800/20 text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800/40 border border-zinc-100 dark:border-white/5"
                             }`}
                         >
                             {cat}
@@ -109,9 +109,15 @@ function Blogs() {
                                     <span className="px-2 py-0.5 rounded-lg bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-zinc-400 text-[9px] font-mono tracking-widest uppercase">
                                         {blog.category}
                                     </span>
-                                    <div className="flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-tighter text-zinc-400">
-                                        <Calendar size={10} />
-                                        {timeAgo(blog.createdAt)}
+                                    <div className="flex items-center gap-3">
+                                        <div className="flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-tighter text-zinc-400">
+                                            <Heart size={10} className={blog.likes > 0 ? "text-red-500" : ""} fill={blog.likes > 0 ? "currentColor" : "none"} />
+                                            {blog.likes || 0}
+                                        </div>
+                                        <div className="flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-tighter text-zinc-400">
+                                            <Calendar size={10} />
+                                            {timeAgo(blog.createdAt)}
+                                        </div>
                                     </div>
                                 </div>
                                 <div>

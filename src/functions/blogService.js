@@ -11,7 +11,8 @@ import {
     where,
     orderBy,
     serverTimestamp,
-    setDoc
+    setDoc,
+    increment
 } from "firebase/firestore";
 import { getEnderChestUrl } from "./admin";
 
@@ -172,6 +173,18 @@ export const deleteBlog = async (id, imageIds = []) => {
         await deleteDoc(doc(db, BLOGS_COLLECTION, id));
     } catch (error) {
         console.error("Error deleting blog:", error);
+        throw error;
+    }
+};
+
+export const toggleLike = async (blogId, isLiking) => {
+    try {
+        const docRef = doc(db, BLOGS_COLLECTION, blogId);
+        await updateDoc(docRef, {
+            likes: increment(isLiking ? 1 : -1)
+        });
+    } catch (error) {
+        console.error("Error toggling like:", error);
         throw error;
     }
 };

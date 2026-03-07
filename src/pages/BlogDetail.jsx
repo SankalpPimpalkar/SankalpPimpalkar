@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getBlogBySlug, getBlogById } from "../functions/blogService";
+import { getBlogBySlug, getBlogById, toggleLike } from "../functions/blogService";
 import { Helmet } from "react-helmet";
-import { ChevronLeft, Calendar, Tag, User } from "lucide-react";
+import { ChevronLeft, Calendar, User, Heart } from "lucide-react";
 import { formatDate } from "../functions/formatDate";
 
 function BlogDetail() {
     const { slug } = useParams();
     const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [likes, setLikes] = useState(0);
+    const [isLiked, setIsLiked] = useState(false);
 
     useEffect(() => {
         const fetchBlog = async () => {
@@ -22,6 +24,11 @@ function BlogDetail() {
                 }
                 
                 setBlog(data);
+                if (data) {
+                    setLikes(data.likes || 0);
+                    const likedArticles = JSON.parse(localStorage.getItem("likedArticles") || "[]");
+                    setIsLiked(likedArticles.includes(data.id));
+                }
             } catch (error) {
                 console.error("Fetch Blog Error:", error);
             } finally {
@@ -30,6 +37,34 @@ function BlogDetail() {
         };
         fetchBlog();
     }, [slug]);
+
+    const handleLike = async () => {
+        if (!blog) return;
+        
+        try {
+            const newIsLiked = !isLiked;
+            setIsLiked(newIsLiked);
+            setLikes(prev => newIsLiked ? prev + 1 : prev - 1);
+            
+            // Update localStorage
+            const likedArticles = JSON.parse(localStorage.getItem("likedArticles") || "[]");
+            if (newIsLiked) {
+                likedArticles.push(blog.id);
+            } else {
+                const index = likedArticles.indexOf(blog.id);
+                if (index > -1) likedArticles.splice(index, 1);
+            }
+            localStorage.setItem("likedArticles", JSON.stringify(likedArticles));
+            
+            // Update DB
+            await toggleLike(blog.id, newIsLiked);
+        } catch (error) {
+            console.error("Like Error:", error);
+            // Revert on error
+            setIsLiked(isLiked);
+            setLikes(blog.likes || 0);
+        }
+    };
 
     if (loading) return <div className="mt-28 flex justify-center">Loading...</div>;
     if (!blog) return <div className="mt-28 flex justify-center flex-col items-center gap-4">
@@ -98,6 +133,17 @@ function BlogDetail() {
                         <p className="text-xs font-semibold dark:text-zinc-200 text-zinc-800">{blog.author}</p>
                         <p className="text-[9px] uppercase tracking-widest text-zinc-400 font-mono">Article Author</p>
                     </div>
+                    <button 
+                        onClick={handleLike}
+                        className={`ml-auto flex items-center gap-2 px-4 py-2 rounded-xl transition-all border ${
+                            isLiked 
+                            ? "bg-red-500/10 border-red-500/20 text-red-500" 
+                            : "bg-zinc-50 dark:bg-white/5 border-zinc-100 dark:border-white/10 text-zinc-400 hover:text-red-500 hover:border-red-500/20"
+                        }`}
+                    >
+                        <Heart size={16} fill={isLiked ? "currentColor" : "none"} />
+                        <span className="text-xs font-medium">{likes}</span>
+                    </button>
                 </div>
             </header>
 
@@ -130,6 +176,23 @@ function BlogDetail() {
                                     </pre>
                                 </div>
                             );
+                        case "quote":
+                            return (
+                                <blockquote key={index} className="my-10 pl-6 border-l-4 border-zinc-200 dark:border-white/10 italic text-xl sm:text-2xl text-zinc-800 dark:text-zinc-200 font-serif leading-relaxed">
+                                    {block.content}
+                                </blockquote>
+                            );
+                        case "list":
+                            return (
+                                <ul key={index} className="my-8 space-y-3">
+                                    {block.items.map((item, i) => (
+                                        <li key={i} className="flex gap-4 text-base sm:text-lg dark:text-zinc-300 text-zinc-700">
+                                            <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-white/20 shrink-0" />
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                            );
                         case "image":
                             return (
                                 <figure key={index} className="space-y-3 my-12">
@@ -145,9 +208,9 @@ function BlogDetail() {
                                     )}
                                 </figure>
                             );
-                        case "embed":
+                        case "embed": {
                             const getYoutubeId = (url) => {
-                                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
                                 const match = url.match(regExp);
                                 return (match && match[2].length === 11) ? match[2] : null;
                             };
@@ -181,6 +244,7 @@ function BlogDetail() {
                                     )}
                                 </figure>
                             );
+                        }
                         default:
                             return null;
                     }
