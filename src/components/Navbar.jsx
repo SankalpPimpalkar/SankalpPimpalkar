@@ -3,7 +3,7 @@ import Button from "./ui/Button"
 import { useEffect, useState } from "react"
 import { Github as GithubLink } from "../data/links"
 import Carousel from "./ui/Carousel"
-import { Home, User, FileText, MessageSquare, Github, Sun, Moon } from "lucide-react"
+import { Home, User, FileText, MessageSquare, Github, Sun, Moon, Settings } from "lucide-react"
 
 const navs = [
     {
@@ -35,6 +35,12 @@ const navs = [
         name: "Github",
         path: GithubLink,
         icon: Github,
+    },
+    {
+        id: 6,
+        name: "Admin",
+        path: "/admin",
+        icon: Settings,
     },
 ]
 

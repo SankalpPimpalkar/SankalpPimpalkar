@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
-import { useState } from "react"
+import { useState } from "react";
+import PropTypes from "prop-types";
 
 function Work({ companyName, role, companylocation, description, respAndAchievements = [], skillUtilized = [] }) {
 
@@ -76,4 +76,13 @@ function Work({ companyName, role, companylocation, description, respAndAchievem
     )
 }
 
-export default Work
+Work.propTypes = {
+    companyName: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    companylocation: PropTypes.string,
+    description: PropTypes.string,
+    respAndAchievements: PropTypes.arrayOf(PropTypes.string),
+    skillUtilized: PropTypes.arrayOf(PropTypes.string),
+};
+
+export default Work;

@@ -1,22 +1,32 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, googleProvider } from "../functions/firebase";
 import { isAdmin } from "../functions/admin";
 import { createBlog, uploadImageToEnderChest, deleteImageFromEnderChest, getCategories } from "../functions/blogService";
+import { getSiteSettings, updateSiteSettings } from "../functions/siteSettingsService";
 import { 
     Plus, Trash2, Image as ImageIcon, Save, LogIn, LogOut, 
     GripVertical, Type, Heading1, Heading2, Code, Link as LinkIcon, Youtube,
-    Sparkles, Copy, Check, Wand2, X, List, Quote, PlusCircle, MinusCircle
+    Sparkles, Copy, Check, Wand2, X, List, Quote, PlusCircle, MinusCircle,
+    LayoutDashboard, Settings, User as UserIcon, Briefcase, Rocket, Globe, User, Camera
 } from "lucide-react";
 
 function AdminDashboard() {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
+    const [activeTab, setActiveTab] = useState("blog"); // "blog" or "site"
+    
+    // Blog State
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
     const [blocks, setBlocks] = useState([{ type: "paragraph", content: "" }]);
+    
+    // Site Settings State
+    const [siteSettings, setSiteSettings] = useState(null);
+    
     const [saving, setSaving] = useState(false);
     const [existingCategories, setExistingCategories] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -56,8 +66,12 @@ Return ONLY the JSON object. Do not include markdown code blocks.`;
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user && isAdmin(user.email)) {
                 setUser(user);
-                const cats = await getCategories();
+                const [cats, settings] = await Promise.all([
+                    getCategories(),
+                    getSiteSettings()
+                ]);
                 setExistingCategories(cats);
+                setSiteSettings(settings);
             } else {
                 setUser(null);
             }
@@ -230,6 +244,20 @@ Return ONLY the JSON object. Do not include markdown code blocks.`;
         }
     };
 
+    const handleSiteSettingsSubmit = async (e) => {
+        e.preventDefault();
+        setSaving(true);
+        try {
+            await updateSiteSettings(siteSettings);
+            alert("Site settings updated successfully!");
+        } catch (error) {
+            console.error("Update Site Settings Error:", error);
+            alert("Failed to update site settings.");
+        } finally {
+            setSaving(false);
+        }
+    };
+
     const handleCodeKeyDown = (e, index) => {
         if (e.key === 'Tab') {
             e.preventDefault();
@@ -281,24 +309,43 @@ Return ONLY the JSON object. Do not include markdown code blocks.`;
             <div className="flex justify-between items-center mb-8 border-b dark:border-white/5 pb-6">
                 <div>
                     <h1 className="text-xl font-semibold tracking-tight">Writing Desk</h1>
-                    <p className="text-[10px] uppercase tracking-widest text-zinc-400 mt-1">Manage your articles</p>
+                    <p className="text-[10px] uppercase tracking-widest text-zinc-400 mt-1">Manage your {activeTab === "blog" ? "articles" : "website"}</p>
                 </div>
-                <button
-                    onClick={handleLogout}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-mono uppercase tracking-widest text-zinc-400 hover:text-red-500 hover:bg-red-500/5 transition-all border border-zinc-100 dark:border-white/5"
-                >
-                    <LogOut size={12} />
-                    Logout
-                </button>
+                <div className="flex items-center gap-4">
+                    <div className="flex bg-zinc-100 dark:bg-white/5 p-1 rounded-xl border dark:border-white/5">
+                        <button
+                            onClick={() => setActiveTab("blog")}
+                            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${activeTab === "blog" ? "bg-white dark:bg-zinc-primary text-black dark:text-white shadow-sm" : "text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"}`}
+                        >
+                            <LayoutDashboard size={12} />
+                            Blog Post
+                        </button>
+                        <button
+                            onClick={() => setActiveTab("site")}
+                            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${activeTab === "site" ? "bg-white dark:bg-zinc-primary text-black dark:text-white shadow-sm" : "text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"}`}
+                        >
+                            <Settings size={12} />
+                            Site Settings
+                        </button>
+                    </div>
+                    <button
+                        onClick={handleLogout}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-mono uppercase tracking-widest text-zinc-400 hover:text-red-500 hover:bg-red-500/5 transition-all border border-zinc-100 dark:border-white/5"
+                    >
+                        <LogOut size={12} />
+                        Logout
+                    </button>
+                </div>
             </div>
 
-            <form 
-                onSubmit={handleSubmit} 
-                className="space-y-8"
-                onKeyDown={(e) => {
-                    if (e.key === 'Tab') e.preventDefault();
-                }}
-            >
+            {activeTab === "blog" ? (
+                <form 
+                    onSubmit={handleSubmit} 
+                    className="space-y-8"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Tab') e.preventDefault();
+                    }}
+                >
                 <div className="space-y-6 px-1">
                     <div className="relative group">
                         <textarea
@@ -753,10 +800,601 @@ Return ONLY the JSON object. Do not include markdown code blocks.`;
                     </button>
                 </div>
             </form>
+            ) : (
+                <SiteSettingsForm 
+                    settings={siteSettings} 
+                    setSettings={setSiteSettings} 
+                    onSubmit={handleSiteSettingsSubmit}
+                    saving={saving}
+                />
+            )}
         </main>
-
-
     );
 }
+
+function SiteSettingsForm({ settings, setSettings, onSubmit, saving }) {
+    if (!settings) return <div className="p-8 text-center text-zinc-400">Loading settings...</div>;
+
+    const updateNested = (key, value) => {
+        setSettings(prev => ({ ...prev, [key]: value }));
+    };
+
+    const addAboutBlock = (type) => {
+        const newBlocks = [...(settings.aboutBlocks || [])];
+        if (type === "image") {
+            newBlocks.push({ type: "image", url: "", fileId: "", caption: "" });
+        } else if (type === "list") {
+            newBlocks.push({ type: "list", items: [""] });
+        } else if (type === "embed") {
+            newBlocks.push({ type: "embed", url: "", caption: "" });
+        } else {
+            newBlocks.push({ type, content: "" });
+        }
+        updateNested("aboutBlocks", newBlocks);
+    };
+
+    const updateAboutBlock = (index, content) => {
+        const newBlocks = [...(settings.aboutBlocks || [])];
+        newBlocks[index] = { ...newBlocks[index], ...content };
+        updateNested("aboutBlocks", newBlocks);
+    };
+
+    const removeAboutBlock = (index) => {
+        const newBlocks = (settings.aboutBlocks || []).filter((_, i) => i !== index);
+        updateNested("aboutBlocks", newBlocks);
+    };
+
+    const handleAboutImageUpload = async (index, file) => {
+        if (!file) return;
+        try {
+            const data = await uploadImageToEnderChest(file);
+            updateAboutBlock(index, { url: data.url, fileId: data.fileId });
+        } catch (error) {
+            console.error("Image Upload Error:", error);
+            alert("Failed to upload image.");
+        }
+    };
+
+    const handleProfileImageUpload = async (file) => {
+        if (!file) return;
+        try {
+            const data = await uploadImageToEnderChest(file);
+            updateNested("profileImage", data.url);
+        } catch (error) {
+            console.error("Profile Image Upload Error:", error);
+            alert("Failed to upload profile image.");
+        }
+    };
+
+    const updateSocial = (platform, url) => {
+        setSettings(prev => ({
+            ...prev,
+            socials: { ...prev.socials, [platform]: url }
+        }));
+    };
+
+    return (
+        <form onSubmit={onSubmit} className="space-y-12 pb-24 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            {/* Profile Picture */}
+            <section className="space-y-4">
+                <div className="flex items-center gap-2 text-zinc-400 uppercase tracking-widest text-[10px] font-bold">
+                    <User size={14} />
+                    Profile Picture
+                </div>
+                <div className="flex flex-col sm:flex-row items-center gap-6 p-6 bg-zinc-50 dark:bg-white/5 border border-zinc-100 dark:border-white/10 rounded-2xl">
+                    <div className="relative group">
+                        <img 
+                            src={settings.profileImage || './me.jpeg'} 
+                            alt="profile" 
+                            className="w-24 h-24 rounded-2xl object-cover border-2 border-green-500/20"
+                        />
+                        <div className="absolute inset-0 bg-black/40 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <Camera size={20} className="text-white" />
+                        </div>
+                    </div>
+                    <div className="flex-1 space-y-2">
+                        <h4 className="text-sm font-bold dark:text-zinc-100">Upload new avatar</h4>
+                        <p className="text-xs text-zinc-500 dark:text-zinc-400">JPG, PNG or GIF. Max size of 2MB.</p>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => handleProfileImageUpload(e.target.files[0])}
+                            className="text-xs file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-[10px] file:font-bold file:uppercase file:tracking-widest file:bg-green-500/10 file:text-green-500 hover:file:bg-green-500/20 cursor-pointer"
+                        />
+                    </div>
+                </div>
+            </section>
+
+            {/* Tagline */}
+            <section className="space-y-4">
+                <div className="flex items-center gap-2 text-zinc-400 uppercase tracking-widest text-[10px] font-bold">
+                    <Type size={14} />
+                    Homepage Tagline
+                </div>
+                <textarea
+                    value={settings.tagLine}
+                    onChange={(e) => updateNested("tagLine", e.target.value)}
+                    placeholder="Describe yourself..."
+                    className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-100 dark:border-white/10 rounded-2xl p-6 text-base leading-relaxed focus:ring-1 focus:ring-green-500/30 outline-none resize-none min-h-[120px]"
+                />
+            </section>
+
+            {/* Socials */}
+            <section className="space-y-4">
+                <div className="flex items-center gap-2 text-zinc-400 uppercase tracking-widest text-[10px] font-bold">
+                    <Globe size={14} />
+                    Social Media & Links
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {Object.entries(settings.socials || {}).map(([platform, url]) => (
+                        <div key={platform} className="flex flex-col gap-1.5">
+                            <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1">{platform}</label>
+                            <div className="flex items-center gap-2 bg-zinc-50 dark:bg-white/5 border border-zinc-100 dark:border-white/10 rounded-xl px-4 py-3">
+                                <LinkIcon size={14} className="text-zinc-400 shrink-0" />
+                                <input
+                                    type="text"
+                                    value={url}
+                                    onChange={(e) => updateSocial(platform, e.target.value)}
+                                    className="w-full bg-transparent border-none outline-none focus:ring-0 text-sm"
+                                />
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Experience */}
+            <section className="space-y-6">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-zinc-400 uppercase tracking-widest text-[10px] font-bold">
+                        <Briefcase size={14} />
+                        Work Experience
+                    </div>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            const newWorks = [...(settings.works || []), {
+                                id: Date.now(),
+                                companyName: "",
+                                role: "",
+                                location: "",
+                                companyDescription: "",
+                                respAndAchievements: [""],
+                                skillUtilized: [""]
+                            }];
+                            updateNested("works", newWorks);
+                        }}
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-green-500/10 text-green-500 rounded-lg text-[10px] uppercase tracking-widest font-bold hover:bg-green-500/20 transition-all"
+                    >
+                        <Plus size={12} />
+                        Add Experience
+                    </button>
+                </div>
+
+                <div className="space-y-4">
+                    {(settings.works || []).map((work, index) => (
+                        <div key={work.id || index} className="group relative bg-zinc-50 dark:bg-white/5 border border-zinc-100 dark:border-white/10 rounded-2xl p-6">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    const newWorks = settings.works.filter((_, i) => i !== index);
+                                    updateNested("works", newWorks);
+                                }}
+                                className="absolute top-4 right-4 p-2 text-zinc-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+                            >
+                                <Trash2 size={16} />
+                            </button>
+                            
+                            <div className="grid grid-cols-2 gap-4 mb-4">
+                                <div className="space-y-1.5">
+                                    <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1">Company</label>
+                                    <input
+                                        type="text"
+                                        value={work.companyName}
+                                        onChange={(e) => {
+                                            const newWorks = [...settings.works];
+                                            newWorks[index].companyName = e.target.value;
+                                            updateNested("works", newWorks);
+                                        }}
+                                        className="w-full bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-xl px-4 py-2 text-sm focus:ring-1 focus:ring-green-500/30 outline-none"
+                                    />
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1">Role</label>
+                                    <input
+                                        type="text"
+                                        value={work.role}
+                                        onChange={(e) => {
+                                            const newWorks = [...settings.works];
+                                            newWorks[index].role = e.target.value;
+                                            updateNested("works", newWorks);
+                                        }}
+                                        className="w-full bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-xl px-4 py-2 text-sm focus:ring-1 focus:ring-green-500/30 outline-none"
+                                    />
+                                </div>
+                            </div>
+                            
+                            <div className="mb-4 space-y-1.5">
+                                <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1">Location & Duration</label>
+                                <input
+                                    type="text"
+                                    value={work.location}
+                                    onChange={(e) => {
+                                        const newWorks = [...settings.works];
+                                        newWorks[index].location = e.target.value;
+                                        updateNested("works", newWorks);
+                                    }}
+                                    placeholder="City, State | Mon Year – Mon Year"
+                                    className="w-full bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-xl px-4 py-2 text-sm focus:ring-1 focus:ring-green-500/30 outline-none"
+                                />
+                            </div>
+
+                            <div className="mb-4 space-y-1.5">
+                                <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1">Company Description</label>
+                                <textarea
+                                    value={work.companyDescription}
+                                    onChange={(e) => {
+                                        const newWorks = [...settings.works];
+                                        newWorks[index].companyDescription = e.target.value;
+                                        updateNested("works", newWorks);
+                                    }}
+                                    className="w-full bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-xl px-4 py-2 text-sm focus:ring-1 focus:ring-green-500/30 outline-none resize-none"
+                                    rows={2}
+                                />
+                            </div>
+
+                            <div className="space-y-4">
+                                <div>
+                                    <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1 mb-2 block">Achievements</label>
+                                    <div className="space-y-2">
+                                        {(work.respAndAchievements || []).map((resp, rIndex) => (
+                                            <div key={rIndex} className="flex gap-2">
+                                                <input
+                                                    type="text"
+                                                    value={resp}
+                                                    onChange={(e) => {
+                                                        const newWorks = [...settings.works];
+                                                        newWorks[index].respAndAchievements[rIndex] = e.target.value;
+                                                        updateNested("works", newWorks);
+                                                    }}
+                                                    className="w-full bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-xl px-4 py-2 text-xs focus:ring-1 focus:ring-green-500/30 outline-none"
+                                                />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        const newWorks = [...settings.works];
+                                                        newWorks[index].respAndAchievements = newWorks[index].respAndAchievements.filter((_, i) => i !== rIndex);
+                                                        updateNested("works", newWorks);
+                                                    }}
+                                                    className="p-2 text-zinc-400 hover:text-red-500"
+                                                >
+                                                    <MinusCircle size={14} />
+                                                </button>
+                                            </div>
+                                        ))}
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const newWorks = [...settings.works];
+                                                newWorks[index].respAndAchievements.push("");
+                                                updateNested("works", newWorks);
+                                            }}
+                                            className="text-[10px] font-mono text-zinc-400 hover:text-green-500 ml-1"
+                                        >
+                                            + Add Achievement
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Projects */}
+            <section className="space-y-6">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-zinc-400 uppercase tracking-widest text-[10px] font-bold">
+                        <Rocket size={14} />
+                        My Work (Projects)
+                    </div>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            const newProjects = [...(settings.projects || []), {
+                                id: Date.now(),
+                                name: "",
+                                created_year: new Date().getFullYear().toString(),
+                                tech: "",
+                                description: "",
+                                source_code: "",
+                                demo: ""
+                            }];
+                            updateNested("projects", newProjects);
+                        }}
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-green-500/10 text-green-500 rounded-lg text-[10px] uppercase tracking-widest font-bold hover:bg-green-500/20 transition-all"
+                    >
+                        <Plus size={12} />
+                        Add Project
+                    </button>
+                </div>
+
+                <div className="space-y-4">
+                    {(settings.projects || []).map((project, index) => (
+                        <div key={project.id || index} className="group relative bg-zinc-50 dark:bg-white/5 border border-zinc-100 dark:border-white/10 rounded-2xl p-6">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    const newProjects = settings.projects.filter((_, i) => i !== index);
+                                    updateNested("projects", newProjects);
+                                }}
+                                className="absolute top-4 right-4 p-2 text-zinc-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+                            >
+                                <Trash2 size={16} />
+                            </button>
+                            
+                            <div className="grid grid-cols-3 gap-4 mb-4">
+                                <div className="col-span-2 space-y-1.5">
+                                    <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1">Project Name</label>
+                                    <input
+                                        type="text"
+                                        value={project.name}
+                                        onChange={(e) => {
+                                            const newProjects = [...settings.projects];
+                                            newProjects[index].name = e.target.value;
+                                            updateNested("projects", newProjects);
+                                        }}
+                                        className="w-full bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-xl px-4 py-2 text-sm focus:ring-1 focus:ring-green-500/30 outline-none"
+                                    />
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1">Year</label>
+                                    <input
+                                        type="text"
+                                        value={project.created_year}
+                                        onChange={(e) => {
+                                            const newProjects = [...settings.projects];
+                                            newProjects[index].created_year = e.target.value;
+                                            updateNested("projects", newProjects);
+                                        }}
+                                        className="w-full bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-xl px-4 py-2 text-sm focus:ring-1 focus:ring-green-500/30 outline-none"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="mb-4 space-y-1.5">
+                                <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1">Tech Stack</label>
+                                <input
+                                    type="text"
+                                    value={project.tech}
+                                    onChange={(e) => {
+                                        const newProjects = [...settings.projects];
+                                        newProjects[index].tech = e.target.value;
+                                        updateNested("projects", newProjects);
+                                    }}
+                                    placeholder="React, Node.js, MongoDB..."
+                                    className="w-full bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-xl px-4 py-2 text-xs focus:ring-1 focus:ring-green-500/30 outline-none"
+                                />
+                            </div>
+
+                            <div className="mb-4 space-y-1.5">
+                                <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1">Description</label>
+                                <textarea
+                                    value={project.description}
+                                    onChange={(e) => {
+                                        const newProjects = [...settings.projects];
+                                        newProjects[index].description = e.target.value;
+                                        updateNested("projects", newProjects);
+                                    }}
+                                    className="w-full bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-xl px-4 py-2 text-sm focus:ring-1 focus:ring-green-500/30 outline-none resize-none"
+                                    rows={3}
+                                />
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-1.5">
+                                    <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1">Source Code</label>
+                                    <div className="flex items-center gap-2 bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-xl px-3 py-2">
+                                        <Code size={12} className="text-zinc-400" />
+                                        <input
+                                            type="text"
+                                            value={project.source_code}
+                                            onChange={(e) => {
+                                                const newProjects = [...settings.projects];
+                                                newProjects[index].source_code = e.target.value;
+                                                updateNested("projects", newProjects);
+                                            }}
+                                            className="w-full bg-transparent border-none outline-none focus:ring-0 text-xs"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1">Live Demo</label>
+                                    <div className="flex items-center gap-2 bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-xl px-3 py-2">
+                                        <LinkIcon size={12} className="text-zinc-400" />
+                                        <input
+                                            type="text"
+                                            value={project.demo}
+                                            onChange={(e) => {
+                                                const newProjects = [...settings.projects];
+                                                newProjects[index].demo = e.target.value;
+                                                updateNested("projects", newProjects);
+                                            }}
+                                            className="w-full bg-transparent border-none outline-none focus:ring-0 text-xs"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* About Me Section with Rich Blocks */}
+            <section className="space-y-6">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-zinc-400 uppercase tracking-widest text-[10px] font-bold">
+                        <UserIcon size={14} />
+                        About Me Content (Rich Blocks)
+                    </div>
+                </div>
+
+                <div className="space-y-4">
+                    {(settings.aboutBlocks || []).map((block, index) => (
+                        <div key={index} className="group relative bg-zinc-50 dark:bg-white/5 border border-zinc-100 dark:border-white/10 rounded-2xl p-6">
+                            <div className="flex justify-between items-center mb-4">
+                                <div className="flex items-center gap-2">
+                                    <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-widest opacity-60 bg-zinc-100 dark:bg-white/5 px-2 py-0.5 rounded">{block.type}</span>
+                                </div>
+                                <button 
+                                    type="button" 
+                                    onClick={() => removeAboutBlock(index)}
+                                    className="p-1.5 text-zinc-300 hover:text-red-500 transition-all"
+                                >
+                                    <Trash2 size={14} />
+                                </button>
+                            </div>
+
+                            {block.type === "header" && (
+                                <textarea
+                                    value={block.content}
+                                    onChange={(e) => updateAboutBlock(index, { content: e.target.value })}
+                                    placeholder="Section Title"
+                                    className="w-full bg-transparent border-none focus:ring-0 p-0 resize-none font-bold text-xl leading-tight placeholder:opacity-30 outline-none"
+                                    rows={1}
+                                />
+                            )}
+                            {block.type === "subheader" && (
+                                <textarea
+                                    value={block.content}
+                                    onChange={(e) => updateAboutBlock(index, { content: e.target.value })}
+                                    placeholder="Sub-section title"
+                                    className="w-full bg-transparent border-none focus:ring-0 p-0 resize-none font-semibold text-lg leading-tight placeholder:opacity-30 outline-none"
+                                    rows={1}
+                                />
+                            )}
+                            {block.type === "paragraph" && (
+                                <textarea
+                                    value={block.content}
+                                    onChange={(e) => updateAboutBlock(index, { content: e.target.value })}
+                                    placeholder="Write your story..."
+                                    className="w-full min-h-[4rem] bg-transparent border-none outline-none focus:ring-0 p-0 resize-none font-sans text-sm leading-relaxed placeholder:opacity-30"
+                                />
+                            )}
+                            {block.type === "list" && (
+                                <div className="space-y-3">
+                                    {(block.items || [""]).map((item, itemIndex) => (
+                                        <div key={itemIndex} className="flex gap-2">
+                                            <div className="mt-2 w-1 h-1 rounded-full bg-green-500/40 shrink-0" />
+                                            <input
+                                                type="text"
+                                                value={item}
+                                                onChange={(e) => {
+                                                    const newItems = [...block.items];
+                                                    newItems[itemIndex] = e.target.value;
+                                                    updateAboutBlock(index, { items: newItems });
+                                                }}
+                                                className="w-full bg-transparent border-none outline-none focus:ring-0 p-0 text-sm"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    const newItems = block.items.filter((_, i) => i !== itemIndex);
+                                                    updateAboutBlock(index, { items: newItems });
+                                                }}
+                                                className="text-zinc-400 hover:text-red-500"
+                                            >
+                                                <MinusCircle size={12} />
+                                            </button>
+                                        </div>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        onClick={() => updateAboutBlock(index, { items: [...(block.items || []), ""] })}
+                                        className="text-[9px] font-mono text-zinc-400 hover:text-green-500"
+                                    >
+                                        + Add Item
+                                    </button>
+                                </div>
+                            )}
+                            {block.type === "image" && (
+                                <div className="space-y-3">
+                                    {block.url ? (
+                                        <div className="relative group/img">
+                                            <img src={block.url} alt="About Me" className="w-full rounded-xl h-40 object-cover" />
+                                            <button 
+                                                type="button"
+                                                onClick={() => updateAboutBlock(index, { url: "", fileId: "" })}
+                                                className="absolute top-2 right-2 p-1.5 bg-black/60 text-white rounded-lg opacity-0 group-hover/img:opacity-100 transition-opacity"
+                                            >
+                                                <Trash2 size={12} />
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div className="w-full h-32 rounded-xl border border-dashed border-zinc-200 dark:border-white/10 flex flex-col items-center justify-center gap-2 bg-zinc-100/30 dark:bg-white/[0.01] relative">
+                                            <ImageIcon size={20} className="text-zinc-300" />
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={(e) => handleAboutImageUpload(index, e.target.files[0])}
+                                                className="absolute inset-0 opacity-0 cursor-pointer"
+                                            />
+                                            <span className="text-[9px] uppercase tracking-widest text-zinc-400">Upload Image</span>
+                                        </div>
+                                    )}
+                                    <input
+                                        type="text"
+                                        value={block.caption || ""}
+                                        onChange={(e) => updateAboutBlock(index, { caption: e.target.value })}
+                                        placeholder="Image caption..."
+                                        className="w-full bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-lg px-3 py-1.5 text-[10px] outline-none"
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                    {["header", "subheader", "paragraph", "list", "image"].map(type => (
+                        <button
+                            key={type}
+                            type="button"
+                            onClick={() => addAboutBlock(type)}
+                            className="px-3 py-1.5 bg-zinc-100 dark:bg-white/5 border border-zinc-100 dark:border-white/10 rounded-lg text-[10px] font-bold uppercase tracking-widest text-zinc-500 hover:bg-zinc-200 dark:hover:bg-white/10 transition-all"
+                        >
+                            + {type}
+                        </button>
+                    ))}
+                </div>
+            </section>
+
+            <div className="fixed bottom-8 left-0 right-0 max-w-2xl mx-auto px-4 pointer-events-none">
+                <button
+                    type="submit"
+                    disabled={saving}
+                    className="w-full flex items-center justify-center gap-2 p-4 bg-green-500 text-white rounded-2xl font-semibold text-base hover:bg-green-600 transition-all disabled:opacity-50 shadow-2xl shadow-green-500/20 pointer-events-auto"
+                >
+                    {saving ? "Synchronizing..." : <><Save size={18} /> Update Website Content</>}
+                </button>
+            </div>
+        </form>
+    );
+}
+
+
+SiteSettingsForm.propTypes = {
+    settings: PropTypes.shape({
+        tagLine: PropTypes.string,
+        profileImage: PropTypes.string,
+        socials: PropTypes.object,
+        works: PropTypes.array,
+        projects: PropTypes.array,
+        aboutBlocks: PropTypes.array,
+    }),
+    setSettings: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    saving: PropTypes.bool,
+};
 
 export default AdminDashboard;

@@ -141,14 +141,6 @@ function Blogs() {
                 )}
             </div>
 
-            <div className="mt-20 pt-10 border-t border-zinc-100 dark:border-zinc-800 flex justify-center">
-                <Link 
-                    to="/admin" 
-                    className="text-[10px] uppercase tracking-widest text-zinc-300 dark:text-zinc-700 hover:text-zinc-500 transition-colors"
-                >
-                    Admin Portal
-                </Link>
-            </div>
         </main>
     );
 }
