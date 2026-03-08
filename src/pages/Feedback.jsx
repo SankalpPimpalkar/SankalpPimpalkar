@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Button from "../components/ui/Button"
 import Input from "../components/ui/Input"
 import { feedbackFunction, fetchFeedbacks } from "../functions/feedbackForm"
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet-async";
 import { MessageSquare, ThumbsUp, Send, User, AtSign, Loader2, CheckCircle2 } from "lucide-react"
 
 function Feedback() {

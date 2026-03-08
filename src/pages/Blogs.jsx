@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getAllBlogs, getCategories } from "../functions/blogService";
 import { Search, Calendar, ChevronRight, Heart } from "lucide-react";
 import { timeAgo } from "../functions/formatDate";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 function Blogs() {
     const [blogs, setBlogs] = useState([]);

@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import Link from "../components/ui/Link";
 import { College, Git, HTML, Nodejs, Django, ReactNative } from "../data/links";
 import { useState, useEffect } from "react";

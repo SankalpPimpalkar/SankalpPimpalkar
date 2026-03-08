@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getBlogBySlug, getBlogById, toggleLike } from "../functions/blogService";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { ChevronLeft, Calendar, User, Heart } from "lucide-react";
 import { formatDate } from "../functions/formatDate";
 import BlockRenderer from "../components/ui/BlockRenderer";

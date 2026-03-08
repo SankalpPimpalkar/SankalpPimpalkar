@@ -1,17 +1,12 @@
 import Project from "../components/ui/Project";
 import Work from "../components/ui/Work";
-import {
-	skills as defaultSkills,
-	works as defaultWorks,
-	projects as defaultProjects,
-	tagLine as defaultTagline,
-} from "../data/data";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
 import { getAllBlogs } from "../functions/blogService";
 import { getSiteSettings } from "../functions/siteSettingsService";
 import { Link } from "react-router-dom";
 import { Calendar, ChevronRight, ArrowRight } from "lucide-react";
+import { GitHubCalendar } from "react-github-calendar";
 import PropTypes from "prop-types";
 
 import * as LucideIcons from "lucide-react";
@@ -32,12 +27,26 @@ LucideIcon.propTypes = {
 
 function Home() {
 	const [blogs, setBlogs] = useState([]);
-	const [settings, setSettings] = useState({
-		tagLine: defaultTagline,
-		skills: defaultSkills,
-		projects: defaultProjects,
-		works: defaultWorks,
-	});
+	const [settings, setSettings] = useState(null);
+	const [theme, setTheme] = useState(
+		document.documentElement.classList.contains("dark") ? "dark" : "light",
+	);
+
+	useEffect(() => {
+		const observer = new MutationObserver(() => {
+			setTheme(
+				document.documentElement.classList.contains("dark") ? "dark" : "light",
+			);
+		});
+
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ["class"],
+		});
+
+		return () => observer.disconnect();
+	}, []);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -147,7 +156,7 @@ function Home() {
 					</h2>
 
 					<p className="w-full max-w-md mt-4 text-base dark:text-zinc-400 text-zinc-600 leading-relaxed font-normal">
-						{settings.tagLine}
+						{settings?.tagLine}
 					</p>
 
 					<div className="flex items-center gap-3 mt-6">
@@ -172,7 +181,7 @@ function Home() {
 				</h3>
 
 				<div className="flex flex-col gap-8 mt-6">
-					{settings.skills.map((category) => (
+					{settings?.skills.map((category) => (
 						<div key={category.category}>
 							<h4 className="text-xs font-mono text-green-500 uppercase tracking-widest mb-4 flex items-center gap-2">
 								<span className="w-8 h-[1px] bg-green-500/30"></span>
@@ -202,13 +211,38 @@ function Home() {
 				</div>
 			</section>
 
+			<section className="mt-12">
+				<h3 className="text-xl font-bold dark:text-zinc-200 text-zinc-800">
+					GitHub Contributions
+				</h3>
+				<div className="mt-6 p-6 border dark:bg-zinc-800/20 bg-zinc-50/50 dark:border-white/5 border-zinc-200/60 rounded-2xl overflow-x-auto custom-scrollbar">
+					<div className="flex justify-center min-w-max px-0">
+						<GitHubCalendar
+							username="sankalppimpalkar"
+							fontSize={12}
+							blockSize={10}
+							blockMargin={3}
+							hideTotalCount
+							colorScheme={theme}
+							theme={{
+								light: ["#f4f4f5", "#22c55e"],
+								dark: ["#18181b", "#22c55e"],
+							}}
+							style={{
+								color: "inherit",
+							}}
+						/>
+					</div>
+				</div>
+			</section>
+
 			<section className="mt-8">
 				<h3 className="text-xl font-bold dark:text-zinc-200 text-zinc-600">
 					My Work
 				</h3>
 
 				<ul className="grid grid-cols-1 gap-4 mt-4 w-full">
-					{settings.projects.map((project) => (
+					{settings?.projects.map((project) => (
 						<Project
 							key={project.id}
 							id={project.id}
@@ -291,7 +325,7 @@ function Home() {
 				</h3>
 
 				<ul className="mt-4 flex flex-col gap-2 items-start w-full">
-					{settings.works.map((work) => (
+					{settings?.works.map((work) => (
 						<Work
 							key={work.id}
 							companyName={work.companyName}

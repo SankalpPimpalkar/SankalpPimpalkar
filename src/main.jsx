@@ -4,6 +4,8 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import Loader from './components/ui/Loader.jsx'
 
+import { HelmetProvider } from "react-helmet-async";
+
 // Just to show you my loading screen 😁
 const App = lazy(() =>
   new Promise(
@@ -14,10 +16,12 @@ const App = lazy(() =>
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Suspense fallback={<Loader />}>
-        <App />
-      </Suspense>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Suspense fallback={<Loader />}>
+          <App />
+        </Suspense>
+      </BrowserRouter>
+    </HelmetProvider>
   </React.StrictMode>
 )
