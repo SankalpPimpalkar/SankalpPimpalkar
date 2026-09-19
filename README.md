@@ -1,5 +1,5 @@
 <a href="https://leetcode.com/u/tty9fx29DP/">
-  <img width="100%" src="https://leetcard.jacoblin.cool/tty9fx29DP?theme=catppuccinMocha&font=Montserrat" alt="LeetCode stats" />
+  <img width="100%" src="https://leetcard.jacoblin.cool/SankalpPimpalkar?theme=catppuccinMocha&font=Montserrat" alt="LeetCode stats" />
 </a>
 
 <br/>
