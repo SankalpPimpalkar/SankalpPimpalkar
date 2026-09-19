@@ -1,22 +1,138 @@
-# 💫 About Me:
+<a href="https://github.com/SankalpPimpalkar">
+  <img width="100%" src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1000&color=00FF41&background=0D111700&vCenter=true&width=1000&height=40&lines=Full+Stack+Developer;Backend+%26+System+Design;Building+Agentic+AI+Workflows;Slow+and+steady.+One+problem+at+a+time." alt="typing" />
+</a>
 
-**I am Sankalp Pimpalkar** 👋  
-I am a computer engineering student—well, not really. 😄  
-I am always trying to learn new technologies. 💻  
-I focus more on a professional approach. 🎯
+```console
+sankalp@dev:~$ whoami
+Sankalp Pimpalkar
 
-## 🌐 Socials:
+sankalp@dev:~$ cat about.txt
+role       : Full Stack Developer @ Sandeep Sawant Group, Mumbai
+focus      : Backend architecture, system design, AI/ML
+education  : B.E. Mechatronics Engineering, Terna Engineering College (2022-2026)
+building   : Scalable NestJS backend (monolith -> microservices)
+learning   : System Design, DSA, Agentic Workflows
+challenge  : 100 Days of Code
+```
 
-[![Discord](https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white)](https://discord.gg/https://discord.com/invite/XZ6tjBtF) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/i.am.sankalp.23) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/sankalp-pimpalkar) [![Pinterest](https://img.shields.io/badge/Pinterest-%23E60023.svg?logo=Pinterest&logoColor=white)](https://pinterest.com/sankalppimpalkar23) [![Reddit](https://img.shields.io/badge/Reddit-%23FF4500.svg?logo=Reddit&logoColor=white)](https://www.reddit.com/user/Intelligent_Data_375/) [![Stack Overflow](https://img.shields.io/badge/-Stackoverflow-FE7A16?logo=stack-overflow&logoColor=white)](https://stackoverflow.com/users/26101732) [![X](https://img.shields.io/badge/X-black.svg?logo=X&logoColor=white)](https://x.com/Sankalp2310)
+## `$ ps aux | grep learning`
 
-# 💻 Tech Stack:
+```console
+sankalp@dev:~$ ps aux | grep learning
+PID  TOPIC               STATUS    NOTES
+101  system-design       running   hands-on via NestJS, monolith -> microservices
+102  dsa                 running   Blind 75, now on Graphs
+103  agentic-workflows   running   multi-agent systems with LangGraph
 
-![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white) ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![GraphQL](https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Windows Terminal](https://img.shields.io/badge/Windows%20Terminal-%234D4D4D.svg?style=for-the-badge&logo=windows-terminal&logoColor=white) ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white) ![DigitalOcean](https://img.shields.io/badge/DigitalOcean-%230167ff.svg?style=for-the-badge&logo=digitalOcean&logoColor=white) ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white) ![Bun](https://img.shields.io/badge/Bun-%23000000.svg?style=for-the-badge&logo=bun&logoColor=white) ![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white) ![DaisyUI](https://img.shields.io/badge/daisyui-5A0EF8?style=for-the-badge&logo=daisyui&logoColor=white) ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white) ![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens) ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Nodemon](https://img.shields.io/badge/NODEMON-%23323330.svg?style=for-the-badge&logo=nodemon&logoColor=%BBDEAD) ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white) ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+sankalp@dev:~$ cat blind75.md
+[x] Arrays   [x] Strings   [x] Binary   [x] LinkedList   [x] Tree
+[~] Graph    [ ] Matrix    [ ] Heap     [ ] Interval     [ ] DP
+```
 
-# 📊 GitHub Stats:
+## `$ ls ~/skills`
 
-![](https://github-readme-streak-stats.herokuapp.com/?user=SankalpPimpalkar&theme=dark&hide_border=false)
+```console
+sankalp@dev:~$ ls skills/languages
+```
+<img src="https://img.shields.io/badge/-JavaScript-21262d?style=flat-square&logo=javascript&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Python-21262d?style=flat-square&logo=python&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-C-21262d?style=flat-square&logo=c&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-C++-21262d?style=flat-square&logo=cplusplus&logoColor=00ff41" />
 
----
+```console
+sankalp@dev:~$ ls skills/frontend
+```
+<img src="https://img.shields.io/badge/-React.js-21262d?style=flat-square&logo=react&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Next.js-21262d?style=flat-square&logo=nextdotjs&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Tailwind_CSS-21262d?style=flat-square&logo=tailwindcss&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Redux-21262d?style=flat-square&logo=redux&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-React_Native-21262d?style=flat-square&logo=react&logoColor=00ff41" />
 
-[![](https://visitcount.itsvg.in/api?id=SankalpPimpalkar&icon=0&color=6)](https://visitcount.itsvg.in)
+```console
+sankalp@dev:~$ ls skills/backend
+```
+<img src="https://img.shields.io/badge/-Node.js-21262d?style=flat-square&logo=nodedotjs&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Express.js-21262d?style=flat-square&logo=express&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-NestJS-21262d?style=flat-square&logo=nestjs&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Django-21262d?style=flat-square&logo=django&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Django_REST_Framework-21262d?style=flat-square&logo=django&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Flask-21262d?style=flat-square&logo=flask&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-FastAPI-21262d?style=flat-square&logo=fastapi&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Prisma-21262d?style=flat-square&logo=prisma&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-SQLAlchemy-21262d?style=flat-square&logo=sqlalchemy&logoColor=00ff41" />
+
+```console
+sankalp@dev:~$ ls skills/architecture
+```
+<img src="https://img.shields.io/badge/-System_Design-21262d?style=flat-square" /> <img src="https://img.shields.io/badge/-Microservices-21262d?style=flat-square" /> <img src="https://img.shields.io/badge/-REST_APIs-21262d?style=flat-square" /> <img src="https://img.shields.io/badge/-Message_Queues-21262d?style=flat-square" /> <img src="https://img.shields.io/badge/-Cron_Jobs-21262d?style=flat-square" /> <img src="https://img.shields.io/badge/-DSA-21262d?style=flat-square" />
+
+```console
+sankalp@dev:~$ ls skills/auth
+```
+<img src="https://img.shields.io/badge/-Clerk-21262d?style=flat-square&logo=clerk&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-JWT-21262d?style=flat-square&logo=jsonwebtokens&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-RBAC-21262d?style=flat-square" />
+
+```console
+sankalp@dev:~$ ls skills/databases
+```
+<img src="https://img.shields.io/badge/-MongoDB-21262d?style=flat-square&logo=mongodb&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-PostgreSQL-21262d?style=flat-square&logo=postgresql&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-pgvector-21262d?style=flat-square&logo=postgresql&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-MariaDB-21262d?style=flat-square&logo=mariadb&logoColor=00ff41" />
+
+```console
+sankalp@dev:~$ ls skills/devops
+```
+<img src="https://img.shields.io/badge/-Linux-21262d?style=flat-square&logo=linux&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Docker-21262d?style=flat-square&logo=docker&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Kubernetes-21262d?style=flat-square&logo=kubernetes&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-AWS_S3-21262d?style=flat-square&logo=amazons3&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Azure-21262d?style=flat-square&logo=microsoftazure&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Git-21262d?style=flat-square&logo=git&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-GitHub-21262d?style=flat-square&logo=github&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Render-21262d?style=flat-square&logo=render&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Vercel-21262d?style=flat-square&logo=vercel&logoColor=00ff41" />
+
+```console
+sankalp@dev:~$ ls skills/ai
+```
+<img src="https://img.shields.io/badge/-Agentic_Workflows-21262d?style=flat-square" /> <img src="https://img.shields.io/badge/-Multi--Agent_Systems-21262d?style=flat-square" /> <img src="https://img.shields.io/badge/-RAG-21262d?style=flat-square" /> <img src="https://img.shields.io/badge/-LangChain-21262d?style=flat-square&logo=langchain&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-LangGraph-21262d?style=flat-square&logo=langgraph&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Ollama-21262d?style=flat-square&logo=ollama&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Hugging_Face-21262d?style=flat-square&logo=huggingface&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-HNSWLib-21262d?style=flat-square" /> <img src="https://img.shields.io/badge/-n8n-21262d?style=flat-square&logo=n8n&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-MCP-21262d?style=flat-square&logo=modelcontextprotocol&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Claude_Code-21262d?style=flat-square&logo=claude&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Cursor-21262d?style=flat-square&logo=cursor&logoColor=00ff41" /> <img src="https://img.shields.io/badge/-Google_Antigravity-21262d?style=flat-square&logo=google&logoColor=00ff41" />
+
+## `$ tree ~/projects/personal`
+
+```console
+sankalp@dev:~$ tree projects/personal
+personal
+├── rag-api
+│   ├── about : Document Q&A system, PDF in, context-aware answers out
+│   ├── stack : FastAPI, Python, SQLAlchemy, PostgreSQL (pgvector), Hugging Face
+│   └── flow  : extract -> chunk -> embed -> store -> retrieve -> generate
+│
+├── code-reviewer
+│   ├── about : Multi-agent code review CLI (orchestrator, reviewer, retriever)
+│   ├── stack : Node.js, LangGraph.js, LangChain.js, Ollama, HNSWLib, Simple-Git
+│   └── flow  : local vector search first, Git + filesystem tools as live fallback
+│
+└── nestjs-backend  [in progress]
+    ├── about : Scalable backend built to practice architecture and system design
+    ├── stack : NestJS, Prisma, DTOs with class-validator, repository pattern
+    └── next  : monolith -> microservices
+```
+
+## `$ tree ~/projects/work`
+
+```console
+sankalp@dev:~$ tree projects/work
+work
+├── real-estate-platform  @ Sandeep Sawant Group
+│   ├── about : SEO-optimized listing site, agent inquiry dashboard, CMS admin panel
+│   └── extra : analytics and advertisement management modules
+│
+├── opus-ai  @ Willow Institute
+│   ├── about : AI-powered health monitoring platform
+│   ├── stack : Next.js, Node.js, MongoDB
+│   └── owned : backend architecture, database schema, RBAC
+│
+├── admin-dashboard  @ SuperCeuticals
+│   ├── about : Role-based admin dashboard with granular access control
+│   └── stack : React.js, JWT authentication
+│
+└── workflow-automation  @ UnifyXperts
+    ├── about : Async workflows for client projects
+    └── stack : message queues, cron jobs, n8n pipelines
+```
+
+## `$ cat experience.log`
+
+```console
+sankalp@dev:~$ cat experience.log
+Feb 2026 - now       Full Stack Developer          @ Sandeep Sawant Group
+Aug 2025 - Oct 2025  Full Stack Developer Intern   @ UnifyXperts
+Mar 2025 - Aug 2025  Full Stack Developer          @ Willow Institute
+Jul 2024 - Sep 2024  Full Stack Developer Intern   @ SuperCeuticals Pvt. Ltd
+```
+
+## `$ ./stats.sh`
+
+```console
+sankalp@dev:~$ ./stats.sh --github --leetcode
+```
+
+<img width="100%" src="https://streak-stats.demolab.com?user=SankalpPimpalkar&hide_border=true&background=0d1117&ring=00ff41&fire=00ff41&currStreakLabel=00ff41&sideLabels=c9d1d9&currStreakNum=c9d1d9&sideNums=c9d1d9&dates=8b949e" alt="GitHub streak" />
+
+<a href="https://leetcode.com/u/tty9fx29DP/">
+  <img width="100%" src="https://leetcard.jacoblin.cool/tty9fx29DP?theme=dark&font=Fira%20Code&ext=heatmap" alt="LeetCode stats" />
+</a>
