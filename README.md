@@ -1,6 +1,15 @@
+<a href="https://leetcode.com/u/tty9fx29DP/">
+  <img width="100%" src="https://leetcard.jacoblin.cool/tty9fx29DP?theme=catppuccinMocha&font=Montserrat" alt="LeetCode stats" />
+</a>
+
+<br/>
+
 <a href="https://github.com/SankalpPimpalkar">
   <img width="100%" src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1000&color=00FF41&background=0D111700&vCenter=true&width=1000&height=40&lines=Full+Stack+Developer;Backend+%26+System+Design;Building+Agentic+AI+Workflows;Slow+and+steady.+One+problem+at+a+time." alt="typing" />
 </a>
+
+<br/>
+
 
 ```console
 sankalp@dev:~$ whoami
@@ -124,15 +133,3 @@ Aug 2025 - Oct 2025  Full Stack Developer Intern   @ UnifyXperts
 Mar 2025 - Aug 2025  Full Stack Developer          @ Willow Institute
 Jul 2024 - Sep 2024  Full Stack Developer Intern   @ SuperCeuticals Pvt. Ltd
 ```
-
-## `$ ./stats.sh`
-
-```console
-sankalp@dev:~$ ./stats.sh --github --leetcode
-```
-
-<img width="100%" src="https://streak-stats.demolab.com?user=SankalpPimpalkar&hide_border=true&background=0d1117&ring=00ff41&fire=00ff41&currStreakLabel=00ff41&sideLabels=c9d1d9&currStreakNum=c9d1d9&sideNums=c9d1d9&dates=8b949e" alt="GitHub streak" />
-
-<a href="https://leetcode.com/u/tty9fx29DP/">
-  <img width="100%" src="https://leetcard.jacoblin.cool/tty9fx29DP?theme=dark&font=Fira%20Code&ext=heatmap" alt="LeetCode stats" />
-</a>
