@@ -30,12 +30,12 @@ challenge  : 100 Days of Code
 sankalp@dev:~$ ps aux | grep learning
 PID  TOPIC               STATUS    NOTES
 101  system-design       running   hands-on via NestJS, monolith -> microservices
-102  dsa                 running   Blind 75, now on Graphs
+102  dsa                 running   Blind 75, now on Interval
 103  agentic-workflows   running   multi-agent systems with LangGraph
 
 sankalp@dev:~$ cat blind75.md
 [x] Arrays   [x] Strings   [x] Binary   [x] LinkedList   [x] Tree
-[~] Graph    [ ] Matrix    [ ] Heap     [ ] Interval     [ ] DP
+[x] Graph    [x] Matrix    [x] Heap     [~] Interval     [ ] DP
 ```
 
 ## `$ ls ~/skills`
