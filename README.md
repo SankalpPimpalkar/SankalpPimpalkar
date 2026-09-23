@@ -35,7 +35,7 @@ PID  TOPIC               STATUS    NOTES
 
 sankalp@dev:~$ cat blind75.md
 [x] Arrays   [x] Strings   [x] Binary   [x] LinkedList   [x] Tree
-[x] Graph    [x] Matrix    [x] Heap     [~] Interval     [ ] DP
+[x] Graph    [x] Matrix    [x] Heap     [x] Interval     [~] DP
 ```
 
 ## `$ ls ~/skills`
