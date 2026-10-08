@@ -1,5 +1,6 @@
 export const Instagram = "https://www.instagram.com/shhaanky/"
 export const Github = "https://github.com/SankalpPimpalkar"
+export const LeetCode = "https://leetcode.com/u/tty9fx29DP/"
 export const LinkedIn = "https://www.linkedin.com/in/sankalp-pimpalkar-179bbb269/"
 export const X = "https://x.com/Sankalp2310"
 export const College = "https://ternaengg.ac.in/"

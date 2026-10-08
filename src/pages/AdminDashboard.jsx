@@ -10,7 +10,8 @@ import {
     Plus, Trash2, Image as ImageIcon, Save, LogIn, LogOut, 
     GripVertical, Type, Heading1, Heading2, Code, Link as LinkIcon, Youtube,
     Sparkles, Copy, Check, Wand2, X, List, Quote, PlusCircle, MinusCircle,
-    LayoutDashboard, Settings, User as UserIcon, Briefcase, Rocket, Globe, User, Camera
+    LayoutDashboard, Settings, User as UserIcon, Briefcase, Rocket, Globe, User, Camera,
+    ChevronUp, ChevronDown
 } from "lucide-react";
 
 function AdminDashboard() {
@@ -813,6 +814,9 @@ Return ONLY the JSON object. Do not include markdown code blocks.`;
 }
 
 function SiteSettingsForm({ settings, setSettings, onSubmit, saving }) {
+    const [draggedWorkIndex, setDraggedWorkIndex] = useState(null);
+    const [draggedProjectIndex, setDraggedProjectIndex] = useState(null);
+
     if (!settings) return <div className="p-8 text-center text-zinc-400">Loading settings...</div>;
 
     const updateNested = (key, value) => {
@@ -973,17 +977,100 @@ function SiteSettingsForm({ settings, setSettings, onSubmit, saving }) {
 
                 <div className="space-y-4">
                     {(settings.works || []).map((work, index) => (
-                        <div key={work.id || index} className="group relative bg-zinc-50 dark:bg-white/5 border border-zinc-100 dark:border-white/10 rounded-2xl p-6">
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    const newWorks = settings.works.filter((_, i) => i !== index);
-                                    updateNested("works", newWorks);
-                                }}
-                                className="absolute top-4 right-4 p-2 text-zinc-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
-                            >
-                                <Trash2 size={16} />
-                            </button>
+                        <div 
+                            key={work.id || index}
+                            draggable="false"
+                            onDragStart={(e) => {
+                                setDraggedWorkIndex(index);
+                                e.dataTransfer.effectAllowed = "move";
+                                e.dataTransfer.setData("text/plain", index.toString());
+                            }}
+                            onDragOver={(e) => {
+                                e.preventDefault();
+                                if (draggedWorkIndex === null || draggedWorkIndex === index) return;
+                                const newWorks = [...settings.works];
+                                const [draggedItem] = newWorks.splice(draggedWorkIndex, 1);
+                                newWorks.splice(index, 0, draggedItem);
+                                setDraggedWorkIndex(index);
+                                updateNested("works", newWorks);
+                            }}
+                            onDragEnd={(e) => {
+                                e.currentTarget.setAttribute('draggable', 'false');
+                                setDraggedWorkIndex(null);
+                            }}
+                            className={`group relative bg-zinc-50 dark:bg-white/5 border rounded-2xl p-6 transition-all duration-200 ${
+                                draggedWorkIndex === index 
+                                    ? 'opacity-40 border-dashed border-green-500 bg-green-500/5 scale-[0.99] shadow-lg' 
+                                    : 'border-zinc-100 dark:border-white/10 hover:border-zinc-200 dark:hover:border-white/20'
+                            }`}
+                        >
+                            {/* Card Top Action & Drag Bar */}
+                            <div className="flex items-center justify-between pb-4 mb-4 border-b border-zinc-200/50 dark:border-white/5">
+                                <div className="flex items-center gap-3">
+                                    <div 
+                                        className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-200/50 dark:bg-white/10 hover:bg-zinc-300/60 dark:hover:bg-white/20 text-zinc-500 dark:text-zinc-300 cursor-grab active:cursor-grabbing transition-colors text-xs font-medium"
+                                        title="Click and drag to rearrange position"
+                                        onMouseDown={(e) => {
+                                            e.currentTarget.closest('.group').setAttribute('draggable', 'true');
+                                        }}
+                                        onMouseUp={(e) => {
+                                            e.currentTarget.closest('.group').setAttribute('draggable', 'false');
+                                        }}
+                                    >
+                                        <GripVertical size={16} />
+                                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider">Drag</span>
+                                    </div>
+
+                                    <div className="flex items-center gap-0.5 bg-zinc-200/40 dark:bg-white/5 rounded-lg p-0.5">
+                                        <button
+                                            type="button"
+                                            disabled={index === 0}
+                                            onClick={() => {
+                                                const newWorks = [...settings.works];
+                                                const temp = newWorks[index - 1];
+                                                newWorks[index - 1] = newWorks[index];
+                                                newWorks[index] = temp;
+                                                updateNested("works", newWorks);
+                                            }}
+                                            title="Move Up"
+                                            className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 disabled:opacity-20 hover:bg-zinc-200/50 dark:hover:bg-white/10 rounded transition-all"
+                                        >
+                                            <ChevronUp size={14} />
+                                        </button>
+                                        <button
+                                            type="button"
+                                            disabled={index === settings.works.length - 1}
+                                            onClick={() => {
+                                                const newWorks = [...settings.works];
+                                                const temp = newWorks[index + 1];
+                                                newWorks[index + 1] = newWorks[index];
+                                                newWorks[index] = temp;
+                                                updateNested("works", newWorks);
+                                            }}
+                                            title="Move Down"
+                                            className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 disabled:opacity-20 hover:bg-zinc-200/50 dark:hover:bg-white/10 rounded transition-all"
+                                        >
+                                            <ChevronDown size={14} />
+                                        </button>
+                                    </div>
+
+                                    <span className="text-xs font-mono font-semibold text-zinc-400 dark:text-zinc-500">
+                                        #{index + 1} {work.companyName ? `• ${work.companyName}` : ''}
+                                    </span>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const newWorks = settings.works.filter((_, i) => i !== index);
+                                        updateNested("works", newWorks);
+                                    }}
+                                    title="Delete Experience"
+                                    className="p-1.5 text-zinc-400 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-colors"
+                                >
+                                    <Trash2 size={16} />
+                                </button>
+                            </div>
                             
                             <div className="grid grid-cols-2 gap-4 mb-4">
                                 <div className="space-y-1.5">
@@ -1085,6 +1172,51 @@ function SiteSettingsForm({ settings, setSettings, onSubmit, saving }) {
                                         </button>
                                     </div>
                                 </div>
+
+                                <div>
+                                    <label className="text-[9px] uppercase tracking-widest text-zinc-500 font-mono ml-1 mb-2 block">Technologies</label>
+                                    <div className="space-y-2">
+                                        {(work.skillUtilized || []).map((skill, sIndex) => (
+                                            <div key={sIndex} className="flex gap-2">
+                                                <input
+                                                    type="text"
+                                                    value={skill}
+                                                    onChange={(e) => {
+                                                        const newWorks = [...settings.works];
+                                                        if (!newWorks[index].skillUtilized) newWorks[index].skillUtilized = [];
+                                                        newWorks[index].skillUtilized[sIndex] = e.target.value;
+                                                        updateNested("works", newWorks);
+                                                    }}
+                                                    placeholder="e.g. React, Node.js, Python"
+                                                    className="w-full bg-white dark:bg-black/20 border border-zinc-100 dark:border-white/10 rounded-xl px-4 py-2 text-xs focus:ring-1 focus:ring-green-500/30 outline-none"
+                                                />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        const newWorks = [...settings.works];
+                                                        newWorks[index].skillUtilized = (newWorks[index].skillUtilized || []).filter((_, i) => i !== sIndex);
+                                                        updateNested("works", newWorks);
+                                                    }}
+                                                    className="p-2 text-zinc-400 hover:text-red-500"
+                                                >
+                                                    <MinusCircle size={14} />
+                                                </button>
+                                            </div>
+                                        ))}
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const newWorks = [...settings.works];
+                                                if (!newWorks[index].skillUtilized) newWorks[index].skillUtilized = [];
+                                                newWorks[index].skillUtilized.push("");
+                                                updateNested("works", newWorks);
+                                            }}
+                                            className="text-[10px] font-mono text-zinc-400 hover:text-green-500 ml-1"
+                                        >
+                                            + Add Technology
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -1121,17 +1253,100 @@ function SiteSettingsForm({ settings, setSettings, onSubmit, saving }) {
 
                 <div className="space-y-4">
                     {(settings.projects || []).map((project, index) => (
-                        <div key={project.id || index} className="group relative bg-zinc-50 dark:bg-white/5 border border-zinc-100 dark:border-white/10 rounded-2xl p-6">
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    const newProjects = settings.projects.filter((_, i) => i !== index);
-                                    updateNested("projects", newProjects);
-                                }}
-                                className="absolute top-4 right-4 p-2 text-zinc-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
-                            >
-                                <Trash2 size={16} />
-                            </button>
+                        <div 
+                            key={project.id || index}
+                            draggable="false"
+                            onDragStart={(e) => {
+                                setDraggedProjectIndex(index);
+                                e.dataTransfer.effectAllowed = "move";
+                                e.dataTransfer.setData("text/plain", index.toString());
+                            }}
+                            onDragOver={(e) => {
+                                e.preventDefault();
+                                if (draggedProjectIndex === null || draggedProjectIndex === index) return;
+                                const newProjects = [...settings.projects];
+                                const [draggedItem] = newProjects.splice(draggedProjectIndex, 1);
+                                newProjects.splice(index, 0, draggedItem);
+                                setDraggedProjectIndex(index);
+                                updateNested("projects", newProjects);
+                            }}
+                            onDragEnd={(e) => {
+                                e.currentTarget.setAttribute('draggable', 'false');
+                                setDraggedProjectIndex(null);
+                            }}
+                            className={`group relative bg-zinc-50 dark:bg-white/5 border rounded-2xl p-6 transition-all duration-200 ${
+                                draggedProjectIndex === index 
+                                    ? 'opacity-40 border-dashed border-green-500 bg-green-500/5 scale-[0.99] shadow-lg' 
+                                    : 'border-zinc-100 dark:border-white/10 hover:border-zinc-200 dark:hover:border-white/20'
+                            }`}
+                        >
+                            {/* Card Top Action & Drag Bar */}
+                            <div className="flex items-center justify-between pb-4 mb-4 border-b border-zinc-200/50 dark:border-white/5">
+                                <div className="flex items-center gap-3">
+                                    <div 
+                                        className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-200/50 dark:bg-white/10 hover:bg-zinc-300/60 dark:hover:bg-white/20 text-zinc-500 dark:text-zinc-300 cursor-grab active:cursor-grabbing transition-colors text-xs font-medium"
+                                        title="Click and drag to rearrange position"
+                                        onMouseDown={(e) => {
+                                            e.currentTarget.closest('.group').setAttribute('draggable', 'true');
+                                        }}
+                                        onMouseUp={(e) => {
+                                            e.currentTarget.closest('.group').setAttribute('draggable', 'false');
+                                        }}
+                                    >
+                                        <GripVertical size={16} />
+                                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider">Drag</span>
+                                    </div>
+
+                                    <div className="flex items-center gap-0.5 bg-zinc-200/40 dark:bg-white/5 rounded-lg p-0.5">
+                                        <button
+                                            type="button"
+                                            disabled={index === 0}
+                                            onClick={() => {
+                                                const newProjects = [...settings.projects];
+                                                const temp = newProjects[index - 1];
+                                                newProjects[index - 1] = newProjects[index];
+                                                newProjects[index] = temp;
+                                                updateNested("projects", newProjects);
+                                            }}
+                                            title="Move Up"
+                                            className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 disabled:opacity-20 hover:bg-zinc-200/50 dark:hover:bg-white/10 rounded transition-all"
+                                        >
+                                            <ChevronUp size={14} />
+                                        </button>
+                                        <button
+                                            type="button"
+                                            disabled={index === settings.projects.length - 1}
+                                            onClick={() => {
+                                                const newProjects = [...settings.projects];
+                                                const temp = newProjects[index + 1];
+                                                newProjects[index + 1] = newProjects[index];
+                                                newProjects[index] = temp;
+                                                updateNested("projects", newProjects);
+                                            }}
+                                            title="Move Down"
+                                            className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 disabled:opacity-20 hover:bg-zinc-200/50 dark:hover:bg-white/10 rounded transition-all"
+                                        >
+                                            <ChevronDown size={14} />
+                                        </button>
+                                    </div>
+
+                                    <span className="text-xs font-mono font-semibold text-zinc-400 dark:text-zinc-500">
+                                        #{index + 1} {project.name ? `• ${project.name}` : ''}
+                                    </span>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const newProjects = settings.projects.filter((_, i) => i !== index);
+                                        updateNested("projects", newProjects);
+                                    }}
+                                    title="Delete Project"
+                                    className="p-1.5 text-zinc-400 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-colors"
+                                >
+                                    <Trash2 size={16} />
+                                </button>
+                            </div>
                             
                             <div className="grid grid-cols-3 gap-4 mb-4">
                                 <div className="col-span-2 space-y-1.5">

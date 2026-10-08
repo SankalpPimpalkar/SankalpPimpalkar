@@ -236,6 +236,29 @@ function Home() {
 				</div>
 			</section>
 
+			<section className="mt-12">
+				<h3 className="text-xl font-bold dark:text-zinc-200 text-zinc-800 mb-6">
+					LeetCode Stats
+				</h3>
+				<a
+					href="https://leetcode.com/u/tty9fx29DP/"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="block w-full transition-transform duration-300 hover:scale-[1.01]"
+				>
+					<img
+						width="100%"
+						src={`https://leetcard.jacoblin.cool/SankalpPimpalkar?theme=custom&colors=${
+							theme === "dark"
+								? "181818,27272a,f4f4f5,a1a1aa,22c55e,22c55e,eab308,ef4444"
+								: "ffffff,e4e4e7,18181b,71717a,22c55e,22c55e,eab308,ef4444"
+						}&font=Montserrat`}
+						alt="LeetCode stats"
+						className="w-full h-auto"
+					/>
+				</a>
+			</section>
+
 			<section className="mt-8">
 				<h3 className="text-xl font-bold dark:text-zinc-200 text-zinc-600">
 					My Work
