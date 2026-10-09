@@ -248,11 +248,7 @@ function Home() {
 				>
 					<img
 						width="100%"
-						src={`https://leetcard.jacoblin.cool/SankalpPimpalkar?theme=custom&colors=${
-							theme === "dark"
-								? "181818,27272a,f4f4f5,a1a1aa,22c55e,22c55e,eab308,ef4444"
-								: "ffffff,e4e4e7,18181b,71717a,22c55e,22c55e,eab308,ef4444"
-						}&font=Montserrat`}
+						src={`https://leetcard.jacoblin.cool/sankalppimpalkar?theme=forest&font=Noto%20Sans%20Old%20South%20Arabian&ext=heatmap`}
 						alt="LeetCode stats"
 						className="w-full h-auto"
 					/>
